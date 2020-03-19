@@ -13,13 +13,13 @@ public class HomeUserView extends AbstractView{
 		System.out.println("\n-----Purtroppo in questo sample l'utente non puà fare nulla, ci scusiamo per il disagio.-----");
 
 	}
-
+//modificare le opzioni dell'user
 	@Override
 	public void showOptions() {
 		System.out.println("-------------MENU------------\n");
-		System.out.println("NESSUNA OPZIONE DISPONIBILE!");
-		System.out.println("\n Esatto, puoi solo uscire...");
-		choice = this.getInput();
+		System.out.println("OPZIONI DISPONIBILI");
+		System.out.println("[c]conversione\t[e]uscita");
+		choice = this.getInput().toLowerCase();
 
 	}
 
@@ -30,6 +30,10 @@ public class HomeUserView extends AbstractView{
 
 		case "e":
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
+			break;
+		
+		case "c":
+			MainDispatcher.getInstance().callAction("Conversion", "doControl", null);
 			break;
 
 		default:

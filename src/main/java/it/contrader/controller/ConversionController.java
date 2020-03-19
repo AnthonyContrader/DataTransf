@@ -5,11 +5,11 @@ import it.contrader.dto.ConversionDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.ConversionService;
 
-
+//da modificare
 public class ConversionController implements Controller {
 
 
-	private static String sub_package = "conversion.";
+
 	
 	private ConversionService conversionService;
 	
@@ -19,7 +19,6 @@ public class ConversionController implements Controller {
 	@Override
 	public void doControl(Request request) {
 
-		String mode = (String) request.get("mode");
 		
 		String choice = (String) request.get("choice");
 
@@ -30,7 +29,13 @@ public class ConversionController implements Controller {
 		String outputType;
 		boolean changes;
 
-	 //da verificare
+		switch(choice) {
+		
+		case "a": //xmltojson
+			
+			
+		}
+	
 		
 		idUser = Integer.parseInt(request.get("idUser").toString());
 		source = request.get("source").toString();
@@ -45,7 +50,7 @@ public class ConversionController implements Controller {
 		request = new Request();
 		request.put("mode", "mode");
 		//Rimanda alla view con la risposta
-		MainDispatcher.getInstance().callView(sub_package + "ConversionInsert", request);
+		MainDispatcher.getInstance().callView( "ConversionInsert", request);
 		}
 	
 }
