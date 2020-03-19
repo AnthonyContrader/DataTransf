@@ -15,10 +15,10 @@ public class Conversion {
 	
 
 	public Conversion() {
-		
 	}
-	public Conversion(int idConversion, int idUser, String source, String sourceType, String outputType, boolean changes)
-	{
+	
+	public Conversion(int idConversion, int idUser, String source, String sourceType, 
+			String outputType, boolean changes){
 	this.idConversion = idConversion;
 	this.idUser = idUser;
 	this.source = source;
@@ -27,14 +27,14 @@ public class Conversion {
 	this.changes = changes;
 	}
 	
-	public Conversion(int idUser, String source, String sourceType, String outputType, boolean changes)
-	{
+	public Conversion(int idUser, String source, String sourceType, String outputType, boolean changes){
 	this.idUser = idUser;
 	this.source = source;
 	this.sourceType = sourceType;
 	this.outputType = outputType;
 	this.changes = changes;
 	}
+	
 	public int getIdConversion() {
 		return idConversion;
 	}
@@ -114,10 +114,11 @@ public class Conversion {
 	return true;
 		
 	}
+	
 	@Override
-	public String toString() {
-		
-		return idConversion + "\t" + idUser + "\t" + source + "\t" + sourceType + "\t" + outputType + "\t" + changes + "\t";
+	public String toString() {	
+		return idConversion + "\t" + idUser + "\t" + source + "\t" + sourceType + 
+				"\t" + outputType + "\t" + changes + "\t";
 	}
 	
 	

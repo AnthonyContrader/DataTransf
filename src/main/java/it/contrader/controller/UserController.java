@@ -51,11 +51,14 @@ public class UserController implements Controller {
 		String password;
 		String usertype;
 
+
+		
 		switch (mode) {
 		
 		// Arriva qui dalla UserReadView. Invoca il Service con il parametro id e invia alla UserReadView uno user da mostrare 
 		case "READ":
 			id = Integer.parseInt(request.get("id").toString());
+		
 			UserDTO userDTO = userService.read(id);
 			request.put("user", userDTO);
 			MainDispatcher.getInstance().callView(sub_package + "UserRead", request);
