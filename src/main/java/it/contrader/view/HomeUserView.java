@@ -7,25 +7,31 @@ import it.contrader.main.MainDispatcher;
 public class HomeUserView extends AbstractView{
 
 	String choice;
-
+	private String username;
+	private String password;
+	private Request request;
+	
 	@Override
 	public void showResults(Request request) {
-		System.out.println("\n-----Purtroppo in questo sample l'utente non puà fare nulla, ci scusiamo per il disagio.-----");
-
+		username = request.get("username").toString();
+		password = request.get("password").toString();
 	}
 //modificare le opzioni dell'user
 	@Override
 	public void showOptions() {
 		System.out.println("-------------MENU------------\n");
 		System.out.println("OPZIONI DISPONIBILI");
-		System.out.println("[c]conversione\t[e]uscita");
+		System.out.println("[c]conversione\t[e]esci");
 		choice = this.getInput().toLowerCase();
 
 	}
 
 	@Override
 	public void submit() {
-
+		request = new Request();
+		
+		request.put("choice", choice);
+		
 		switch (choice) {
 
 		case "e":
@@ -33,7 +39,9 @@ public class HomeUserView extends AbstractView{
 			break;
 		
 		case "c":
-			MainDispatcher.getInstance().callAction("Conversion", "doControl", null);
+			request.put("username", username);
+			request.put("password", password);
+			MainDispatcher.getInstance().callAction("Conversion", "doControl", request);
 			break;
 
 		default:

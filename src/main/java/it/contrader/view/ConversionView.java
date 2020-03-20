@@ -4,15 +4,17 @@ import it.contrader.controller.Request;
 import it.contrader.main.MainDispatcher;
 
 public class ConversionView extends AbstractView {
-	String source;
-	String sourceType;
-	String outputType;
+	private String source;
+	private String sourceType;
+	private String outputType;
+	private String username;
 	
-	String choice;
+	private String choice;
 	private Request request;
 	
 	@Override
 	public void showResults(Request request) {
+		this.username = request.get("username").toString();
 	}
 
 	@Override
@@ -37,7 +39,11 @@ public class ConversionView extends AbstractView {
 		switch (choice) {
 		
 		case "a":
-		MainDispatcher.getInstance().callAction("Conversion", "doControl", request);
+			request.put("choice", choice);
+			request.put("source", source);
+			request.put("sourceType", sourceType);
+			request.put("outputType", outputType);
+			MainDispatcher.getInstance().callAction("Conversion", "doControl", request);
 		break;
 		
 		case "e":

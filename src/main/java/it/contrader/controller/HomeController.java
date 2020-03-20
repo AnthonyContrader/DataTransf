@@ -24,7 +24,7 @@ public class HomeController implements Controller {
 			String password = request.get("password").toString();
 
 			// Qui invoca il Login Service
-			String usertype= loginService.login(username, password);
+			String usertype = loginService.login(username, password);
 
 			// Reindirizza alla giusta view in base allo usertype
 			switch(usertype) {
