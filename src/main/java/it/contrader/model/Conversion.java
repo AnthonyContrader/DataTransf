@@ -35,6 +35,22 @@ public class Conversion {
 	this.changes = changes;
 	}
 	
+	public Conversion(int idConversion, int idUser, String source, String sourceType, String outputType){
+		
+		this.idConversion = idConversion;
+		this.idUser = idUser;
+		this.source = source;
+		this.sourceType = sourceType;
+		this.outputType = outputType;
+		}
+public Conversion(int idConversion, String source, String sourceType, String outputType){
+		
+		this.idConversion = idConversion;
+		this.source = source;
+		this.sourceType = sourceType;
+		this.outputType = outputType;
+		}
+	
 	public int getIdConversion() {
 		return idConversion;
 	}
