@@ -18,6 +18,7 @@ public class ConversionLogView extends AbstractView {
 			@SuppressWarnings("unchecked")
 			List<Conversion> conversion = (List<Conversion>) request.get("Log");
 			for (Conversion c: conversion) {
+				//System.out.println(c); stampa tutte le informazioni
 				System.out.println(c.getIdUser()+"\t\t" + c.getIdConversion() +"\t\t" + c.getSourceType() +"\t\t" + c.getOutputType());
 			}
 			System.out.println();
