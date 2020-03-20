@@ -45,6 +45,16 @@ public class ConversionDTO {
 	this.outputType = outputType;
 	this.changes = changes;
 	}
+	
+	public ConversionDTO (int idConversion, int idUser, String sourceType, String outputType)
+	{
+	this.idConversion = idConversion;
+	this.idUser = idUser;
+	this.sourceType = sourceType;
+	this.outputType = outputType;
+	}
+	
+	
 	public int getIdConversion() {
 		return idConversion;
 	}

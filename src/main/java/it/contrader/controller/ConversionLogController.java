@@ -5,7 +5,8 @@ import it.contrader.service.ConversionLogService;
 
 public class ConversionLogController implements Controller{
 	
-	private ConversionLogService conversionLogService;
+	private ConversionLogService conversionLogService = new ConversionLogService();
+	
 	
 
 	@Override
@@ -18,14 +19,17 @@ public class ConversionLogController implements Controller{
 					switch(choice) {
 					
 					case "AA":
+						request.put("Log", this.conversionLogService.getAll());
 						MainDispatcher.getInstance().callView("ConversionLog", request);
 						break;
 						
 					case "AU": 
+						request.put("Log", this.conversionLogService.getAllLogUser(0));
 						MainDispatcher.getInstance().callView("ConversionLog", request);
 						break;
 						
 					case "US": 
+						request.put("Log", this.conversionLogService.getAllLogUser(0));
 						MainDispatcher.getInstance().callView("ConversionLog", request);
 						break;
 					
