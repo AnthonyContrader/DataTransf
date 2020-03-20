@@ -47,10 +47,10 @@ public class ConversionView extends AbstractView {
 		break;
 		
 		case "e":
-			MainDispatcher.getInstance().callAction("HomeUser", "doControl", null);
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 			break;
 		default:
-			MainDispatcher.getInstance().callAction("HomeUser", "doControl", null);
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		}	}
 
 }

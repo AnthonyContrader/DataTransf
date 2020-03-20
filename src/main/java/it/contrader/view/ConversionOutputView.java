@@ -1,6 +1,7 @@
 package it.contrader.view;
 
 import it.contrader.controller.Request;
+import it.contrader.main.MainDispatcher;
 
 public class ConversionOutputView extends AbstractView {
 
@@ -44,7 +45,7 @@ public class ConversionOutputView extends AbstractView {
 			break;
 		
 		case "b":
-			
+			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 			break;
 		
 		}

@@ -24,12 +24,11 @@ public class ConversionLogController implements Controller{
 						break;
 						
 					case "AU": 
-						request.put("Log", this.conversionLogService.getAllLogUser(0));
-						MainDispatcher.getInstance().callView("ConversionLog", request);
+						MainDispatcher.getInstance().callView("ConversionLogAdmin", request);
 						break;
 						
 					case "US": 
-						request.put("Log", this.conversionLogService.getAllLogUser(0));
+						request.put("Log", this.conversionLogService.getAllLogUser(Integer.parseInt(request.get("idUser").toString())));
 						MainDispatcher.getInstance().callView("ConversionLog", request);
 						break;
 					
