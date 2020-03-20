@@ -14,7 +14,7 @@ public class ConversionView extends AbstractView {
 	
 	@Override
 	public void showResults(Request request) {
-		this.username = request.get("username").toString();
+		//this.username = request.get("username").toString();
 	}
 
 	@Override

@@ -28,8 +28,9 @@ public class ConversionOutputView extends AbstractView {
 	@Override
 	public void showOptions() {
 		// TODO Auto-generated method stub
-		System.out.println("[b] Go Back");
+		System.out.println("[a]Continue\t[b] Go Back");
 		this.choice = getInput().toLowerCase();
+		
 	}
 
 	@Override
@@ -37,6 +38,10 @@ public class ConversionOutputView extends AbstractView {
 		// TODO Auto-generated method stub
 		
 		switch(choice) {
+		
+		case "a":
+			
+			break;
 		
 		case "b":
 			
