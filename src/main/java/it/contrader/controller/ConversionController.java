@@ -36,11 +36,17 @@ public class ConversionController implements Controller {
 			sourceType = request.get("sourceType").toString();
 			outputType = request.get("outputType").toString();
 			JSONObject obj;
+			request.put("source", source);
+			request.put("sourceType", sourceType);
+			request.put("outputType", outputType);
+			ConversionDTO conversiontoinsert = new ConversionDTO( source, sourceType, outputType);
+			conversionService.insert(conversiontoinsert);
 			
 			switch (sourceType.toLowerCase()) {
 				case "xml":
 					obj = XML.toJSONObject(source);
 					request.put("output", obj.toString());
+					
 					break;
 
 				case "json":

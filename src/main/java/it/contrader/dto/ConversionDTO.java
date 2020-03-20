@@ -29,6 +29,14 @@ public class ConversionDTO {
 	this.changes = changes;
 	}
 	
+	public ConversionDTO (String source, String sourceType, String outputType ) {
+		
+		this.source = source;
+		this.sourceType = sourceType;
+		this.outputType = outputType;
+		
+	}
+	
 	public ConversionDTO (int idUser, String source, String sourceType, String outputType, boolean changes)
 	{
 	this.idUser = idUser;
