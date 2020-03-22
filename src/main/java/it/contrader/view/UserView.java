@@ -34,8 +34,9 @@ public class UserView extends AbstractView {
 			
 			@SuppressWarnings("unchecked")
 			List<UserDTO> users = (List<UserDTO>) request.get("users");
-			for (UserDTO u: users)
+			for (UserDTO u: users) {
 				System.out.println(u);
+			}
 			System.out.println();
 		}
 	}
@@ -46,7 +47,7 @@ public class UserView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-		System.out.println("          Scegli l'operazione da effettuare:");
+		System.out.println("			Scegli l'operazione da effettuare:");
 		System.out.println("[L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]sci");
 
 		this.choice = getInput();
