@@ -13,12 +13,12 @@ import it.contrader.model.Conversion;
 public class ConversionConverter {
 	
 	public ConversionDTO toDTO(Conversion conversion) {
-		ConversionDTO conversionDTO = new ConversionDTO(conversion.getIdConversion(), conversion.getIdUser(), conversion.getSource(), conversion.getSourceType(), conversion.getOutputType(), conversion.isChanges());
+		ConversionDTO conversionDTO = new ConversionDTO(conversion.getIdConversion(), conversion.getIdUser(), conversion.getSource(), conversion.getSourceType(), conversion.getOutputType(), conversion.getChanges());
         return conversionDTO;
 }
 
     public Conversion toEntity(ConversionDTO conversionDTO) {
-		Conversion conversion = new Conversion(conversionDTO.getIdConversion(),conversionDTO.getIdUser(), conversionDTO.getSource(), conversionDTO.getSourceType(), conversionDTO.getOutputType(), conversionDTO.isChanges());
+		Conversion conversion = new Conversion(conversionDTO.getIdConversion(),conversionDTO.getIdUser(), conversionDTO.getSource(), conversionDTO.getSourceType(), conversionDTO.getOutputType(), conversionDTO.getChanges());
 		return conversion;
 		
 }

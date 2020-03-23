@@ -13,13 +13,13 @@ public class ConversionDTO {
 	
 	private String outputType;
 	
-	private boolean changes;
+	private int changes;
 	
 
 	public ConversionDTO() {
 		
 	}
-	public ConversionDTO (int idConversion, int idUser, String source, String sourceType, String outputType, boolean changes)
+	public ConversionDTO (int idConversion, int idUser, String source, String sourceType, String outputType, int changes)
 	{
 	this.idConversion = idConversion;
 	this.idUser = idUser;
@@ -37,7 +37,7 @@ public class ConversionDTO {
 		
 	}
 	
-	public ConversionDTO (int idUser, String source, String sourceType, String outputType, boolean changes)
+	public ConversionDTO (int idUser, String source, String sourceType, String outputType, int changes)
 	{
 	this.idUser = idUser;
 	this.source = source;
@@ -85,10 +85,10 @@ public class ConversionDTO {
 	public void setOutputType(String outputType) {
 		this.outputType = outputType;
 	}
-	public boolean isChanges() {
+	public int getChanges() {
 		return changes;
 	}
-	public void setChanges(boolean changes) {
+	public void setChanges(int changes) {
 		this.changes = changes;
 	}
 	

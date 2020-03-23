@@ -1,7 +1,7 @@
 package it.contrader.controller;
 
 /*
- * interfaccia Controller
+ *  interfaccia Controller 
  */
 public interface Controller {
 	public void doControl(Request request);

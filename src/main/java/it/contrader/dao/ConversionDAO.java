@@ -16,7 +16,7 @@ public boolean insert(Conversion conversionToInsert) {
 		preparedStatement.setString(2, conversionToInsert.getSource());
 		preparedStatement.setString(3, conversionToInsert.getSourceType());
 		preparedStatement.setString(4, conversionToInsert.getOutputType());
-		preparedStatement.setBoolean(5, conversionToInsert.isChanges());
+		preparedStatement.setInt(5, conversionToInsert.getChanges());
 		preparedStatement.execute();
 		return true;
 	} catch (SQLException e) {
