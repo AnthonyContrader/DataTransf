@@ -49,8 +49,8 @@ public class ConversionController implements Controller {
 				case "xml":
 					if(map!=null) {
 						for(Map.Entry<String, String> tagName : map.entrySet()) {
-						source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
-						source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");	
+							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
+							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");	
 						}
 					}
 					obj = XML.toJSONObject(source);
@@ -60,6 +60,10 @@ public class ConversionController implements Controller {
 					break;
 
 				case "json":
+					if(map!=null) {
+						for(Map.Entry<String, String> tagName : map.entrySet()) {
+							source = source.replaceAll("\"" +  tagName.getKey() + "\":",  "\"" + tagName.getValue() + "\":");						}
+					}
 					obj = new JSONObject(source);
 					request.put("output", obj.toString());
 					break;
@@ -71,8 +75,12 @@ public class ConversionController implements Controller {
 			MainDispatcher.getInstance().callView("ConversionOutput", request);
 			break;
 		
-		case "c": //xmltojson
+		case "c": 
 			MainDispatcher.getInstance().callView("Conversion", request);
+			break;
+			
+		case "d": 
+			MainDispatcher.getInstance().callView("Changes", request);
 			break;
 		
 		default:

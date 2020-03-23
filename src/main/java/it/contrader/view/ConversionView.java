@@ -28,7 +28,7 @@ public class ConversionView extends AbstractView {
 	System.out.println("inserisci il formato di output");
 		outputType = this.getInput();
 		
-	System.out.println("Continua [a] exit [e]");
+	System.out.println("Continua [a]\tModifica [m]\tExit [e]");
 		choice = this.getInput().toLowerCase();
 		
 	}
@@ -44,11 +44,20 @@ public class ConversionView extends AbstractView {
 			request.put("sourceType", sourceType);
 			request.put("outputType", outputType);
 			MainDispatcher.getInstance().callAction("Conversion", "doControl", request);
-		break;
+			break;
 		
 		case "e":
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 			break;
+			
+		case "m":
+			request.put("choice", "create_changes");
+			request.put("source", source);
+			request.put("sourceType", sourceType);
+			request.put("outputType", outputType);
+			MainDispatcher.getInstance().callAction("Changes", "doControl", request);
+			break;
+			
 		default:
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);
 		}	}

@@ -25,7 +25,8 @@ public class ChangesView extends AbstractView {
 		for(Map.Entry<String, String> tagName : map.entrySet()) {
 			System.out.println("Vuoi cambiare il tag di questo attributo " + tagName.getKey() + "?");
 			System.out.println("[S]si\t[N]no");
-			if (getInput().toUpperCase() == "S") {
+			String input = getInput();
+			if (input.equalsIgnoreCase("S")) {
 				System.out.println("Inserisci il tag che vuoi mettere al posto di " + tagName.getKey()+ ":");
 				map.put(tagName.getKey(), getInput());
 			}

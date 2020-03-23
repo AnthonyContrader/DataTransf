@@ -27,10 +27,13 @@ public class ChangesController implements Controller {
 		
 		switch(request.getString("choice").toString().toUpperCase()) {
 			case "CREATE_CHANGES":
-				String typeIn = request.get("typeIn").toString();
+				String typeIn = request.get("sourceType").toString();
+				String typeOut = request.get("outputType").toString();
 				String source = request.get("source").toString();
 				Map<String, String> map = new HashMap<String, String>();
 				Matcher m;
+				this.request.put("sourceType", typeIn);
+				this.request.put("outputType", typeOut);
 				switch(typeIn) {
 					case "xml":
 						m = Pattern.compile("\\</(.*?)\\>").matcher(source);
@@ -42,7 +45,6 @@ public class ChangesController implements Controller {
 						break;
 					case "json":
 						 m = Pattern.compile("\\\"(.*?)\\\":").matcher(source);
-						
 						  while(m.find()) {
 							  if(!m.group(1).contains("\",\"")) {
 								   map.put(m.group(1), m.group(1));
