@@ -47,9 +47,11 @@ public class ConversionController implements Controller {
 			
 			switch (sourceType.toLowerCase()) {
 				case "xml":
-					for(Map.Entry<String, String> tagName : map.entrySet()) {
+					if(map!=null) {
+						for(Map.Entry<String, String> tagName : map.entrySet()) {
 						source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
 						source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");	
+						}
 					}
 					obj = XML.toJSONObject(source);
 					request.put("output", obj.toString());
