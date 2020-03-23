@@ -1,6 +1,8 @@
 package it.contrader.controller;
 
 
+import java.util.Map;
+
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -36,6 +38,7 @@ public class ConversionController implements Controller {
 			sourceType = request.get("sourceType").toString();
 			outputType = request.get("outputType").toString();
 			JSONObject obj;
+			@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) request.get("changes");
 			request.put("source", source);
 			request.put("sourceType", sourceType);
 			request.put("outputType", outputType);
@@ -44,8 +47,13 @@ public class ConversionController implements Controller {
 			
 			switch (sourceType.toLowerCase()) {
 				case "xml":
+					for(Map.Entry<String, String> tagName : map.entrySet()) {
+						source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
+						source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");	
+					}
 					obj = XML.toJSONObject(source);
 					request.put("output", obj.toString());
+					
 					
 					break;
 

@@ -11,14 +11,14 @@ public class Conversion {
 	
 	private String outputType;
 	
-	private boolean changes;
+	private int changes;
 	
 
 	public Conversion() {
 	}
 	
 	public Conversion(int idConversion, int idUser, String source, String sourceType, 
-			String outputType, boolean changes){
+			String outputType, int changes){
 	this.idConversion = idConversion;
 	this.idUser = idUser;
 	this.source = source;
@@ -27,7 +27,7 @@ public class Conversion {
 	this.changes = changes;
 	}
 	
-	public Conversion(int idUser, String source, String sourceType, String outputType, boolean changes){
+	public Conversion(int idUser, String source, String sourceType, String outputType, int changes){
 	this.idUser = idUser;
 	this.source = source;
 	this.sourceType = sourceType;
@@ -81,10 +81,10 @@ public Conversion(int idConversion, String source, String sourceType, String out
 	public void setOutputType(String outputType) {
 		this.outputType = outputType;
 	}
-	public boolean isChanges() {
+	public int getChanges() {
 		return changes;
 	}
-	public void setChanges(boolean changes) {
+	public void setChanges(int changes) {
 		this.changes = changes;
 	}
 	
