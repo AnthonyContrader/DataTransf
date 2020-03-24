@@ -14,7 +14,6 @@ public class ConversionService {
 		this.conversionConverter = new ConversionConverter();
 	}
 	public boolean insert(ConversionDTO dto) {
-		
 		return conversionDAO.insert(conversionConverter.toEntity(dto));
 	}
 }
