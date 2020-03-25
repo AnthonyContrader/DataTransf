@@ -32,4 +32,24 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/UserServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>ConversionLogServlet</display-name>
+    <servlet-name>ConversionLogServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.ConversionLogServlet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>ConversionLogServlet</servlet-name>
+    <url-pattern>/ConversionLogServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>ConversionServlet</display-name>
+    <servlet-name>ConversionServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.ConversionServlet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>ConversionServlet</servlet-name>
+    <url-pattern>/ConversionServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
