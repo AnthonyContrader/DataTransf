@@ -26,7 +26,7 @@
 
 </div>
 
-<button href="newconversion.jsp">New Conversion</button>
+<a href="newconversion.jsp">New Conversion</a>
 
 </body>
 </html>
