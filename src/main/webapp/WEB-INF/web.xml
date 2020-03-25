@@ -52,4 +52,14 @@
     <servlet-name>ConversionServlet</servlet-name>
     <url-pattern>/ConversionServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>ChangesServlet</display-name>
+    <servlet-name>ChangesServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.ChangesServlet</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>ChangesServlet</servlet-name>
+    <url-pattern>/ChangesServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

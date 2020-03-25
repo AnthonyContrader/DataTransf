@@ -15,7 +15,7 @@
 
 	<div class="navbar">
 	 <a  href="./homeadmin.jsp">Home</a>
-	  <a href="./UserServlet?mode=userlist">Users</a>
+	  <a href="UserServlet?mode=userlist">Users</a>
 	  <a href="conversionmanager.jsp">Conversions</a>
 	  <a class="active" href="#">My Conversion</a>
 	  
@@ -23,7 +23,7 @@
 	  	if(request.getParameter("usertype").equalsIgnoreCase("admin")) {
 	  %>
 	  
-		  <a class="active" href="/ConversionLogServlet?mode=getAll">All Conversion</a>
+		  <a class="active" href="ConversionLogServlet?mode=readAll">All Conversion</a>
 	 <% 
 	  	}
 	 %>

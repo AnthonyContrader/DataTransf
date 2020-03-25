@@ -27,6 +27,8 @@ public class ConversionLogServlet extends HttpServlet {
 		ConversionLogService service = new ConversionLogService();
 		switch (mode) {
 		case "readAll":
+			request.setAttribute("usertype", request.getParameter("usertype"));
+			request.setAttribute("log", service.getAll());
 			getServletContext().getRequestDispatcher("/conversion/conversionlog.jsp").forward(request, response);
 			break;
 

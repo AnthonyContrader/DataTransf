@@ -33,10 +33,10 @@ public class ConversionServlet extends HttpServlet {
 		String outputType;
 		int changes;
 		
-		switch(choice.toUpperCase()) {
+		switch(choice.toLowerCase()) {
 		
 		case "a":
-			source = request.getParameter("source").toString();
+			source = request.getParameter("source");
 			sourceType = request.getParameter("sourceType").toString();
 			outputType = request.getParameter("outputType").toString();
 			JSONObject obj;
@@ -44,8 +44,8 @@ public class ConversionServlet extends HttpServlet {
 			@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) request.getAttribute("changes");
 			request.setAttribute("source", source);
 			request.setAttribute("sourceType", sourceType);
-			request.setAttribute("outputType", outputType);
-			ConversionDTO conversiontoinsert = new ConversionDTO( source, sourceType, outputType);
+			//request.setAttribute("outputType", outputType);
+			ConversionDTO conversiontoinsert = new ConversionDTO( source, sourceType, "json");
 			conversionService.insert(conversiontoinsert);
 			
 			switch (sourceType.toLowerCase()) {
