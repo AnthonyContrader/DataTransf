@@ -26,7 +26,7 @@ public class ConversionServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ConversionService conversionService = new ConversionService();
-		String choice = request.getParameter("choice");
+		String choice = request.getParameter("mode");
 		
 		String source;
 		String sourceType;
@@ -73,7 +73,7 @@ public class ConversionServlet extends HttpServlet {
 					break;
 					
 			}
-			//getServletContext().getRequestDispatcher("/user/conversionmanager.jsp").forward(request, response);
+		//getServletContext().getRequestDispatcher("/user/conversionmanager.jsp").forward(request, response);
 		}
 		//super.service(request, response);
 		
