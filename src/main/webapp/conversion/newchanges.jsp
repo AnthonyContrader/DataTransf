@@ -9,17 +9,18 @@
 </head>
 <body>
 
+<%@ include file="../css/header.jsp" %>
+
 <div class="navbar">
-  <a class="active" href="../homeadmin.jsp">Home</a>
-  <a href="../UserServlet?mode=userlist">Users</a>
-  <a href="../conversion/conversionmanager.jsp">Conversions</a>
-  <a href="../LogoutServlet" id="logout">Logout</a>
+  <a href="homeadmin.jsp">Home</a>
+  <a href="UserServlet?mode=userlist">Users</a>
+  <a class="active" href="../conversion/conversionmanager.jsp">Conversions</a>
+  <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 
-<%
-	Map<String, String> changes = (Map<String, String>) request.getAttribute("changes");
-%>
-
+	<%
+		Map<String, String> changes = (Map<String, String>) request.getAttribute("changes");
+	%>
 
 	<form id="newChanges" action="../ConversionServlet?mode=a" method="post">
 	

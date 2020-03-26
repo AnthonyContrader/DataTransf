@@ -32,7 +32,7 @@
       <label for="sourceType">Source Type</label>
     </div>
     <div class="col-75">
-     <input type="radio" id="xml" name="sourceType" value="xml">
+    <input type="radio" id="xml" name="sourceType" value="xml">
 	<label for="xml">XML</label><br>
 	<input type="radio" id="json" name="sourceType" value="json">
 	<label for="json">JSON</label><br>
@@ -43,7 +43,7 @@
       <label for="outputType">Output Type</label>
     </div>
     <div class="col-75">
-     <input type="radio" id="xml" name="outputType" value="xml">
+    <input type="radio" id="xml" name="outputType" value="xml">
 	<label for="xml">XML</label><br>
 	<input type="radio" id="json" name="outputType" value="json">
 	<label for="json">JSON</label><br>
