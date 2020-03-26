@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.json.XML;
@@ -25,6 +26,7 @@ public class ConversionServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		final HttpSession session = request.getSession();
 		ConversionService conversionService = new ConversionService();
 		String choice = request.getParameter("mode");
 		
@@ -36,24 +38,26 @@ public class ConversionServlet extends HttpServlet {
 		switch(choice.toLowerCase()) {
 		
 		case "a":
-			source = request.getParameter("source");
-			sourceType = request.getParameter("sourceType").toString();
-			outputType = request.getParameter("outputType").toString();
+			source = session.getAttribute("source").toString();
+			sourceType = session.getAttribute("sourceType").toString();
+			outputType = session.getAttribute("outputType").toString();
 			JSONObject obj;
 			
-			@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) request.getAttribute("changes");
-			request.setAttribute("source", source);
-			request.setAttribute("sourceType", sourceType);
-			//request.setAttribute("outputType", outputType);
-			ConversionDTO conversiontoinsert = new ConversionDTO( source, sourceType, "json");
+			@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) session.getAttribute("changes");
+			
+			ConversionDTO conversiontoinsert = new ConversionDTO( source, sourceType, outputType);
 			conversionService.insert(conversiontoinsert);
 			
 			switch (sourceType.toLowerCase()) {
 				case "xml":
+					
 					if(map!=null) {
 						for(Map.Entry<String, String> tagName : map.entrySet()) {
+							tagName.setValue(request.getParameter(tagName.getKey()));
+						}
+						for(Map.Entry<String, String> tagName : map.entrySet()) {
 							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
-							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");	
+							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
 						}
 					}
 					obj = XML.toJSONObject(source);

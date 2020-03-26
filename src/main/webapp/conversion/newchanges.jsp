@@ -20,10 +20,10 @@
 </div>
 
 	<%
-		Map<String, String> changes = (Map<String, String>) request.getAttribute("changes");
+		Map<String, String> changes = (Map<String, String>) session.getAttribute("changes");
 	%>
 
-	<form id="newChanges" action="ConversionServlet?mode=a&changes=<%=changes%>" method="post">
+	<form id="newChanges" action="ConversionServlet?mode=a" method="post">
 	
 	<%
 		for(Map.Entry<String, String> change : changes.entrySet()) {
@@ -33,7 +33,7 @@
 	      <label for="<%=change.getKey()%>"><%=change.getKey()%></label>
 	    </div>
 	    <div class="col-75">
-	    	<input type="text" name="<%=change.getKey()%>" placeholder="<%=change.getValue()%>" >
+	    	<input type="text" name="<%=change.getKey()%>" value="<%=change.getValue()%>" >
 	    </div>
 	  	</div>
 	<%

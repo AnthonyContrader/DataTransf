@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-link href="../css/vittoriostyle.css" rel="stylesheet">
+<link href="../css/vittoriostyle.css" rel="stylesheet">
 <meta charset="ISO-8859-1">
 <title>conversionOutput</title>	
 </head>
@@ -21,7 +21,7 @@ link href="../css/vittoriostyle.css" rel="stylesheet">
 
 <h1>Il risultato della tua conversione è questo </h1>
 
-<p> <%=request.getAttribute("output") %> </p>
+<p> <%=request.getParameter("output")%> </p>
 
 
 </body>
