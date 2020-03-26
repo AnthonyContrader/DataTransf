@@ -58,6 +58,7 @@ public class ConversionServlet extends HttpServlet {
 					}
 					obj = XML.toJSONObject(source);
 					request.setAttribute("output", obj.toString());
+					getServletContext().getRequestDispatcher("/conversion/conversionOutput.jsp").forward(request, response);
 					break;
 				case "json":
 					if(map!=null) {

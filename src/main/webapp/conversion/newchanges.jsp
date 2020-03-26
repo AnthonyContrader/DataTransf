@@ -23,7 +23,7 @@
 		Map<String, String> changes = (Map<String, String>) request.getAttribute("changes");
 	%>
 
-	<form id="newChanges" action="../ConversionServlet?mode=a" method="post">
+	<form id="newChanges" action="ConversionServlet?mode=a&changes=<%=changes%>" method="post">
 	
 	<%
 		for(Map.Entry<String, String> change : changes.entrySet()) {
