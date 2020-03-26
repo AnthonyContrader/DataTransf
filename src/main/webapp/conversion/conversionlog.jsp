@@ -16,7 +16,7 @@
 	<div class="navbar">
 	 <a  href="./homeadmin.jsp">Home</a>
 	  <a href="UserServlet?mode=userlist">Users</a>
-	  <a href="conversionmanager.jsp">Conversions</a>
+	  <a href="conversion/conversionmanager.jsp">Conversions</a>
 	  <a class="active" href="#">My Conversion</a>
 	  
 	  <% 
