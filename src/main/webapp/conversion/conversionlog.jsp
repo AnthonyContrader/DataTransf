@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.ConversionDTO"
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.ConversionDTO, it.contrader.dto.UserDTO"
     import="java.util.List"
     %>
 <!DOCTYPE html>
@@ -17,16 +17,16 @@
 	 <a  href="./homeadmin.jsp">Home</a>
 	  <a href="UserServlet?mode=userlist">Users</a>
 	  <a href="conversion/conversionmanager.jsp">Conversions</a>
-	  <a class="active" href="#">My Conversion</a>
+	  <a <% if(request.getParameter("mode").equalsIgnoreCase("read")) { %> class="active" <% } %> href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
 	  
-	  <% 
-	  	if(request.getParameter("usertype").equalsIgnoreCase("admin")) {
+	  <%
+	  	UserDTO u = (UserDTO) session.getAttribute("user");
+	  	if(u.getUsertype().equalsIgnoreCase("admin")) { 
 	  %>
-	  
-		  <a class="active" href="ConversionLogServlet?mode=readAll">All Conversion</a>
-	 <% 
-	  	}
-	 %>
+	  	<a <% if(request.getParameter("mode").equalsIgnoreCase("readAll")) { %> class="active" <% } %> href="ConversionLogServlet?mode=readAll">All Conversion</a>
+	  <% 
+	  	} 
+	  %>
 	  <a href="./LogoutServlet" id="logout">Logout</a>
 	</div>
 
@@ -44,7 +44,6 @@
 		</tr>
 		<%
 			for (ConversionDTO c : list) {
-				System.out.println(c);
 		%>
 		<tr>
 			<td><%=c.getIdConversion()%></td>

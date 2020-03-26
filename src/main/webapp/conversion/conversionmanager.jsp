@@ -1,3 +1,4 @@
+<%@page import="it.contrader.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -12,8 +13,16 @@
 <div class="navbar">
  <a  href="../homeadmin.jsp">Home</a>
   <a href="../UserServlet?mode=userlist">Users</a>
-  <a class="active" href="#">Conversions</a>
+  <a class="active" href="#">Conversions</a>  
   <a href="../ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
+  <%
+  	UserDTO u = (UserDTO) session.getAttribute("user");
+  	if(u.getUsertype().equalsIgnoreCase("admin")) { 
+  %>
+  	<a href="../ConversionLogServlet?mode=readAll">All Conversion</a>
+  <% 
+  	} 
+  %>
   <a href="../LogoutServlet" id="logout">Logout</a>
 </div>
 
@@ -28,6 +37,8 @@
 </div>
 
 <a href="newconversion.jsp">New Conversion</a>
+
+<body><%@ include file="../css/footer.jsp" %>
 
 </body>
 </html>

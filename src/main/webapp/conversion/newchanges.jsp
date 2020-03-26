@@ -23,7 +23,16 @@
 		Map<String, String> changes = (Map<String, String>) session.getAttribute("changes");
 	%>
 
-	<form id="newChanges" action="ConversionServlet?mode=a" method="post">
+	<form id="newChanges" action="ChangesServlet?mode=insert_changes&userId=${user.getId()}" method="post">
+	
+		<div class="row">
+	    <div class="col-25">
+	      <label for="changesName">Changes Name</label>
+	    </div>
+	    <div class="col-75">
+	    	<input type="text" name="changesName" placeholder="changes name..." >
+	    </div>
+	  	</div>
 	
 	<%
 		for(Map.Entry<String, String> change : changes.entrySet()) {

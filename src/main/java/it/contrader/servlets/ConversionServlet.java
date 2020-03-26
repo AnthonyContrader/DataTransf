@@ -52,9 +52,9 @@ public class ConversionServlet extends HttpServlet {
 				case "xml":
 					
 					if(map!=null) {
-						for(Map.Entry<String, String> tagName : map.entrySet()) {
+					/*	for(Map.Entry<String, String> tagName : map.entrySet()) {
 							tagName.setValue(request.getParameter(tagName.getKey()));
-						}
+						}*/
 						for(Map.Entry<String, String> tagName : map.entrySet()) {
 							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
 							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");

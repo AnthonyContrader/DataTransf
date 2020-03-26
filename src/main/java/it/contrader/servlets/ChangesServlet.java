@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.contrader.dto.ChangesDTO;
+import it.contrader.service.ChangesService;
+import it.contrader.service.Service;
+
 public class ChangesServlet extends HttpServlet {
 
 	/**
@@ -28,7 +32,7 @@ public class ChangesServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		final HttpSession session = request.getSession();
-		
+		int idUser = Integer.parseInt(request.getParameter("userId"));
 		switch(request.getParameter("mode").toUpperCase()) {
 			case "CREATE_CHANGES":
 				String typeIn = request.getParameter("sourceType");
@@ -60,8 +64,17 @@ public class ChangesServlet extends HttpServlet {
 						getServletContext().getRequestDispatcher("/conversion/newchanges.jsp").forward(request, response);
 						break;
 				}
-				
+				break;
 			
+			case "INSERT_CHANGES":
+				@SuppressWarnings("unchecked") Map<String,String> newMap = (Map<String, String>) session.getAttribute("changes");
+				for(Map.Entry<String, String> tagName : newMap.entrySet()) {
+					tagName.setValue(request.getParameter(tagName.getKey()));
+				}
+				Service<ChangesDTO> service = new ChangesService();
+				session.setAttribute("changes", newMap);
+				service.insert(new ChangesDTO(request.getParameter("changesName"), newMap.toString(), idUser));
+				getServletContext().getRequestDispatcher("/ConversionServlet?mode=a").forward(request, response);
 			default:
 				break;
 		}

@@ -14,14 +14,14 @@
 <div class="navbar">
   <a href="homeadmin.jsp">Home</a>
   <a href="UserServlet?mode=userlist">Users</a>
-  <a class="active" href="../conversion/conversionmanager.jsp">Conversions</a>
+  <a class="active" href="./conversion/conversionmanager.jsp">Conversions</a>
   <a href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 
 <h1>Il risultato della tua conversione è questo </h1>
 
-<p> <%=request.getParameter("output")%> </p>
+<p> <%=request.getAttribute("output")%> </p>
 
 
 </body>

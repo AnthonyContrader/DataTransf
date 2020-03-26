@@ -7,7 +7,7 @@ import it.contrader.model.Changes;
 
 public class ChangesService extends AbstractService<Changes, ChangesDTO>{
 
-	ChangesService(){
+	public ChangesService(){
 		this.dao = new ChangesDAO();
 		this.converter = new ChangesConverter();
 	}

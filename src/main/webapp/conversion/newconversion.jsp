@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +15,19 @@
   <a href="../UserServlet?mode=userlist">Users</a>
   <a href="../conversion/conversionmanager.jsp">Conversions</a>
   <a href="../ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
+   <%
+  	UserDTO u = (UserDTO) session.getAttribute("user");
+  	if(u.getUsertype().equalsIgnoreCase("admin")) { 
+  %>
+  	<a href="ConversionLogServlet?mode=readAll">All Conversion</a>
+  <% 
+  	} 
+  %>	
   <a href="../LogoutServlet" id="logout">Logout</a>
 </div>
 
  
-<form id="newConversion" action="../ChangesServlet?mode=create_changes" method="post">
+<form id="newConversion" action="../ChangesServlet?mode=create_changes&userId=${user.getId()}" method="post">
 	<div class="row">
     <div class="col-25">
       <label for="source">Source</label>

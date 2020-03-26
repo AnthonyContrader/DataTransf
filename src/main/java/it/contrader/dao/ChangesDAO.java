@@ -14,6 +14,7 @@ public class ChangesDAO implements DAO<Changes> {
 	private final String QUERY_READ = "SELECT * FROM changes WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE changes SET changesName=?, changes=?, idUser=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM changes WHERE id=?";
+	private final String QUERY_LAST_ID = "SELECT LAST_INSERT_ID()";
 
 	@Override
 	public List<Changes> getAll() {
@@ -131,4 +132,17 @@ public class ChangesDAO implements DAO<Changes> {
 		}
 	}
 
+	public int lastId() {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_LAST_ID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			return resultSet.getInt("id");
+		} catch (SQLException e) {
+			// TODO: handle exception
+			return -1;
+		}
+	}
+	
 }
