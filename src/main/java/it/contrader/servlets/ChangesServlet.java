@@ -71,12 +71,11 @@ public class ChangesServlet extends HttpServlet {
 				for(Map.Entry<String, String> tagName : newMap.entrySet()) {
 					tagName.setValue(request.getParameter(tagName.getKey()));
 				}
-				Service<ChangesDTO> service = new ChangesService();
-				ChangesService testo = new ChangesService();
+				ChangesService service = new ChangesService();
 				session.setAttribute("changes", newMap);
 				service.insert(new ChangesDTO(request.getParameter("changesName"), newMap.toString(), idUser));
-				System.out.println(testo.lastId(new ChangesDTO(request.getParameter("changesName"), newMap.toString(), idUser)));
-				getServletContext().getRequestDispatcher("/ConversionServlet?mode=a").forward(request, response);
+				getServletContext().getRequestDispatcher("/ConversionServlet?mode=a&idChanges="+ 
+						service.lastId(idUser) + "&idUser=" + idUser).forward(request, response);
 			default:
 				break;
 		}

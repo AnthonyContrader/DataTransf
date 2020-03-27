@@ -8,7 +8,7 @@ import it.contrader.model.Conversion;
 import it.contrader.utils.ConnectionSingleton;
 
 public class ConversionDAO {
-	private final String QUERY_CREATE= "INSERT INTO conversion (IdConversion, idUser, source, sourceType, outputType, changes ) VALUES (?,?,?,?,?,?)";
+	private final String QUERY_CREATE = "INSERT INTO conversion (idUser, source, sourceType, outputType, changes ) VALUES (?,?,?,?,?)";
 
 	public boolean insert (Conversion ConversionToInsert) {
 		Connection connection = ConnectionSingleton.getInstance();

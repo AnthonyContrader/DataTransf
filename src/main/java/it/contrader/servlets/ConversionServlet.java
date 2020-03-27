@@ -45,16 +45,14 @@ public class ConversionServlet extends HttpServlet {
 			
 			@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) session.getAttribute("changes");
 			
-			ConversionDTO conversiontoinsert = new ConversionDTO( source, sourceType, outputType);
+			ConversionDTO conversiontoinsert = new ConversionDTO( Integer.parseInt(request.getParameter("idUser")), 
+					source, sourceType, outputType, Integer.parseInt(request.getParameter("idChanges")));
 			conversionService.insert(conversiontoinsert);
 			
 			switch (sourceType.toLowerCase()) {
 				case "xml":
 					
 					if(map!=null) {
-					/*	for(Map.Entry<String, String> tagName : map.entrySet()) {
-							tagName.setValue(request.getParameter(tagName.getKey()));
-						}*/
 						for(Map.Entry<String, String> tagName : map.entrySet()) {
 							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
 							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");

@@ -52,9 +52,9 @@ public class ChangesService implements Service<ChangesDTO>{
 		return dao.delete(id);
 	}
 
-	public int lastId(ChangesDTO dto) {
+	public int lastId(int idUser) {
 		// Converte un DTO in entità e lo passa al DAO per l'inserimento
-		return dao.insertWithId(converter.toEntity(dto));
+		return dao.lastId(idUser);
 	}
 
 }
