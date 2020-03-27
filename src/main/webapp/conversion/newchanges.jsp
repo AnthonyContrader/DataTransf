@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.Map" %>
+    pageEncoding="ISO-8859-1" import="java.util.Map"
+    import="it.contrader.dto.UserDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,14 @@
   <a href="UserServlet?mode=userlist">Users</a>
   <a class="active" href="../conversion/conversionmanager.jsp">Conversions</a>
   <a href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
+   <%
+  	UserDTO u = (UserDTO) session.getAttribute("user");
+  	if(u.getUsertype().equalsIgnoreCase("admin")) { 
+  %>
+  	<a href="../ConversionLogServlet?mode=readAll">All Conversion</a>
+  <% 
+  	} 
+  %>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 
@@ -25,14 +34,21 @@
 
 	<form id="newChanges" action="ChangesServlet?mode=insert_changes&userId=${user.getId()}" method="post">
 	
+	
+	<p> Inserisci il nome da dare al preset : </p>
 		<div class="row">
 	    <div class="col-25">
-	      <label for="changesName">Changes Name</label>
+	      <label for="changesName">Preset Name</label>
 	    </div>
 	    <div class="col-75">
-	    	<input type="text" name="changesName" placeholder="changes name..." >
+	    	<input type="text" name="changesName" placeholder=" preset..." >
 	    </div>
 	  	</div>
+	<p> -----------------------------------------------------------------------------</p>
+	
+	
+	
+	<p> I tag contenuti all'interno del messaggio sono: </p> 
 	
 	<%
 		for(Map.Entry<String, String> change : changes.entrySet()) {

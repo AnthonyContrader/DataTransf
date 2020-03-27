@@ -46,7 +46,7 @@ public abstract class AbstractService<Entity,DTO> implements Service<DTO> {
 
 	@Override
 	public boolean delete(int id) {
-		// Questo mtodo chiama direttamente il DAO
+		// Questo metodo chiama direttamente il DAO
 		return dao.delete(id);
 	}
 

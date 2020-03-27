@@ -15,7 +15,9 @@ public class ChangesDAO implements DAO<Changes> {
 	private final String QUERY_UPDATE = "UPDATE changes SET changesName=?, changes=?, idUser=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM changes WHERE id=?";
 	private final String QUERY_LAST_ID = "SELECT LAST_INSERT_ID()";
-
+	
+	
+	
 	@Override
 	public List<Changes> getAll() {
 		// TODO Auto-generated method stub
@@ -131,18 +133,39 @@ public class ChangesDAO implements DAO<Changes> {
 			return false;
 		}
 	}
-
-	public int lastId() {
+	
+	public int insertWithId(Changes dto) {
+		// TODO Auto-generated method stub
 		Connection connection = ConnectionSingleton.getInstance();
+		
 		try {
+			
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_LAST_ID);
+			preparedStatement.setString(1, dto.getChangesName());
+			preparedStatement.setString(2, dto.getChanges());
+			preparedStatement.setInt(3, dto.getIdUser());
 			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
+			System.out.println(resultSet.next());
 			return resultSet.getInt("id");
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 			return -1;
 		}
 	}
+	
+	public int lastId(Changes dto) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_LAST_ID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			return resultSet.getInt("LAST_INSERT_ID()");
+		} catch (SQLException e) {
+			// TODO: handle exception
+			return -1;
+		}
+	}
+	
 	
 }

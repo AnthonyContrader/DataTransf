@@ -16,6 +16,14 @@
   <a class="active" href="UserServlet?mode=userlist">Users</a>
   <a href="conversion/conversionmanager.jsp">Conversions</a>
   <a href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
+   <%
+  	UserDTO u1 = (UserDTO) session.getAttribute("user");
+  	if(u1.getUsertype().equalsIgnoreCase("admin")) { 
+  %>
+  	<a href="../ConversionLogServlet?mode=readAll">All Conversion</a>
+  <% 
+  	} 
+  %>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">

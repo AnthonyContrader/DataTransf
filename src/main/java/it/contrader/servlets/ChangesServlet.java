@@ -72,8 +72,10 @@ public class ChangesServlet extends HttpServlet {
 					tagName.setValue(request.getParameter(tagName.getKey()));
 				}
 				Service<ChangesDTO> service = new ChangesService();
+				ChangesService testo = new ChangesService();
 				session.setAttribute("changes", newMap);
 				service.insert(new ChangesDTO(request.getParameter("changesName"), newMap.toString(), idUser));
+				System.out.println(testo.lastId(new ChangesDTO(request.getParameter("changesName"), newMap.toString(), idUser)));
 				getServletContext().getRequestDispatcher("/ConversionServlet?mode=a").forward(request, response);
 			default:
 				break;
