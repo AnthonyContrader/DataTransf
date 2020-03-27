@@ -6,7 +6,7 @@
 <title>DATATRANSF</title>
 </head>
 <body>
-
+<%@include file="css/header.jsp"%>
 		<form class="login" action="LoginServlet" method="post">
 
 				<label for="user">Username: </label>
