@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.Map"
-    import="it.contrader.dto.UserDTO" %>
+    import="it.contrader.dto.UserDTO,java.util.ArrayDeque" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +29,7 @@
 </div>
 
 	<%
-		Map<String, String> changes = (Map<String, String>) session.getAttribute("changes");
+	 ArrayDeque<Map.Entry<String, String>> changes = (ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
 	%>
 
 	<form id="newChanges" action="ChangesServlet?mode=insert_changes&userId=${user.getId()}" method="post">
@@ -51,7 +51,7 @@
 	<p> I tag contenuti all'interno del messaggio sono: </p> 
 	
 	<%
-		for(Map.Entry<String, String> change : changes.entrySet()) {
+		for(Map.Entry<String, String> change : changes) {
 	%>
 		<div class="row">
 	    <div class="col-25">

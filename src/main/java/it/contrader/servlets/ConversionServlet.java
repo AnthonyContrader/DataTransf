@@ -1,6 +1,7 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -42,8 +43,9 @@ public class ConversionServlet extends HttpServlet {
 			sourceType = session.getAttribute("sourceType").toString();
 			outputType = session.getAttribute("outputType").toString();
 			JSONObject obj;
-			
-			@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) session.getAttribute("changes");
+			@SuppressWarnings("unchecked")	 ArrayDeque<Map.Entry<String, String>> newdeque =
+					(ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
+			//@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) session.getAttribute("changes");
 			
 			ConversionDTO conversiontoinsert = new ConversionDTO( Integer.parseInt(request.getParameter("idUser")), 
 					source, sourceType, outputType, Integer.parseInt(request.getParameter("idChanges")));
@@ -52,8 +54,8 @@ public class ConversionServlet extends HttpServlet {
 			switch (sourceType.toLowerCase()) {
 				case "xml":
 					
-					if(map!=null) {
-						for(Map.Entry<String, String> tagName : map.entrySet()) {
+					if(newdeque!=null) {
+						for(Map.Entry<String, String> tagName : newdeque) {
 							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
 							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
 						}
@@ -63,8 +65,8 @@ public class ConversionServlet extends HttpServlet {
 					getServletContext().getRequestDispatcher("/conversion/conversionOutput.jsp").forward(request, response);
 					break;
 				case "json":
-					if(map!=null) {
-						for(Map.Entry<String, String> tagName : map.entrySet()) {
+					if(newdeque!=null) {
+						for(Map.Entry<String, String> tagName : newdeque) {
 							source = source.replaceAll("\"" +  tagName.getKey() + "\":",  "\"" + tagName.getValue() + "\":");						}
 					}
 					obj = new JSONObject(source);
