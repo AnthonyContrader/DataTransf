@@ -29,22 +29,31 @@
 <h1>Welcome in Conversion ${user.getUsername()}</h1>
 <div class="main">
 
-<p>In questa pagina potrai convertire il tuo file da XML a JSON oppure da JSON a XML.
-Per effettuare questa conversione hai bisogno di 3 semplici elementi:
+<p>In questa pagina potrai convertire il tuo file da XML a JSON oppure da JSON a XML.<br>
+Per effettuare questa conversione hai bisogno di 3 semplici elementi:<br>
 
-- Il file da convertire;
-- Il formato del file di input;
-- Il formato del file di output;
+	<ul>
+		<li>Il file da convertire;</li>
+		<li>Il formato del file di input;</li>
+		<li>Il formato del file di output;</li>
+	</ul>   
 
 Prima di convertire il messaggio potrai effettuare delle operazioni all'interno:
 
-- Cambiare il nome dei tag in modo permanente oppure solo per questa conversione;
-- Ordinare i tag in modo tale da averli nella posizione che vuoi.
+	<ul>
+		<li>Cambiare il nome dei tag in modo permanente oppure solo per questa conversione;</li>
+		<li>Ordinare i tag in modo tale da averli nella posizione che vuoi.</li>
+	
+	</ul>  
+
+
 </p>
 
-</div>
+<br>
 
-<a href="newconversion.jsp">New Conversion</a>
+<a style="color: white; background-color: #00a990; border-radius: 7px; padding: 12px;" href="newconversion.jsp">New Conversion</a>
+
+</div>
 
 <body><%@ include file="../css/footer.jsp" %>
 
