@@ -53,10 +53,11 @@ public class ConversionLogDAO  {
 			ConversionDTO conversion;
 			while (resultSet.next()) {
 				int idConversion = resultSet.getInt("idConversion");
+				int changes = resultSet.getInt("changes");
 				String source = resultSet.getString("source");
 				String sourceType = resultSet.getString("sourceType");
 				String outputType = resultSet.getString("outputType");
-				conversion = new ConversionDTO(idConversion, idUser, source, sourceType);
+				conversion = new ConversionDTO(idConversion, idUser, source, sourceType, outputType, changes);
 				conversionList.add(conversion);
 			}
 		} catch (SQLException e) {
