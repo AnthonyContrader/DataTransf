@@ -1,7 +1,9 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.AbstractMap;
+import java.util.ArrayDeque;
+
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import it.contrader.dto.ChangesDTO;
 import it.contrader.service.ChangesService;
-import it.contrader.service.Service;
 
 public class ChangesServlet extends HttpServlet {
 
@@ -38,42 +39,52 @@ public class ChangesServlet extends HttpServlet {
 				String typeIn = request.getParameter("sourceType");
 				String typeOut = request.getParameter("outputType");
 				String source = request.getParameter("source");
-				Map<String, String> map = new HashMap<String, String>();
-				Matcher m;
+				
+				
+				ArrayDeque<Map.Entry<String, String>> deque = new ArrayDeque<Map.Entry<String,String>>();
+				Matcher m;			
+				
 				session.setAttribute("source", source);
 				session.setAttribute("outputType", typeOut);
 				session.setAttribute("sourceType", typeIn);
 				switch(typeIn) {
 					case "xml":
-						m = Pattern.compile("\\</(.*?)\\>").matcher(source);
-						while(m.find()) {
-						    map.put(m.group(1), m.group(1));  
-						}
-						//request.setAttribute("changes", map);
-						session.setAttribute("changes", map);
+						m = Pattern.compile("\\<(.*?)\\>").matcher(source);
+						  while(m.find()) {	
+                                    Map.Entry<String,String> entry =
+									    new AbstractMap.SimpleEntry<String, String>(m.group(1), m.group(1));
+							    if(!deque.contains(entry) && !m.group(1).startsWith("/")) {
+							    	deque.addLast(entry);
+							    }
+							    }
+				
+						session.setAttribute("changes", deque);
 						getServletContext().getRequestDispatcher("/conversion/newchanges.jsp").forward(request, response);
 						break;
 					case "json":
 						 m = Pattern.compile("\\\"(.*?)\\\":").matcher(source);
 						  while(m.find()) {
-							  if(!m.group(1).contains("\",\"")) {
-								   map.put(m.group(1), m.group(1));
-							  }
+							  Map.Entry<String,String> entry =
+									    new AbstractMap.SimpleEntry<String, String>(m.group(1), m.group(1));
+							    if(!deque.contains(entry) && !m.group(1).startsWith("/")) {
+							    	deque.addLast(entry);
+							    }
 						  }
-						request.setAttribute("changes", map);
+						session.setAttribute("changes", deque);
 						getServletContext().getRequestDispatcher("/conversion/newchanges.jsp").forward(request, response);
 						break;
 				}
 				break;
 			
 			case "INSERT_CHANGES":
-				@SuppressWarnings("unchecked") Map<String,String> newMap = (Map<String, String>) session.getAttribute("changes");
-				for(Map.Entry<String, String> tagName : newMap.entrySet()) {
+			
+				@SuppressWarnings("unchecked") ArrayDeque<Map.Entry<String, String>> newdeque = (ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
+				for(Map.Entry<String, String> tagName : newdeque) {
 					tagName.setValue(request.getParameter(tagName.getKey()));
 				}
 				ChangesService service = new ChangesService();
-				session.setAttribute("changes", newMap);
-				service.insert(new ChangesDTO(request.getParameter("changesName"), newMap.toString(), idUser));
+				session.setAttribute("changes", newdeque);
+				service.insert(new ChangesDTO(request.getParameter("changesName"), newdeque.toString(), idUser));
 				getServletContext().getRequestDispatcher("/ConversionServlet?mode=a&idChanges="+ 
 						service.lastId(idUser) + "&idUser=" + idUser).forward(request, response);
 			default:
