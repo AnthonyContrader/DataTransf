@@ -5,7 +5,6 @@ import java.util.List;
 import it.contrader.converter.ChangesConverter;
 import it.contrader.converter.Converter;
 import it.contrader.dao.ChangesDAO;
-import it.contrader.dao.DAO;
 import it.contrader.dto.ChangesDTO;
 import it.contrader.model.Changes;
 

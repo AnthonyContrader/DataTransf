@@ -2,7 +2,10 @@ package it.contrader.servlets;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.json.XML;
+
+import com.mysql.cj.util.StringUtils;
 
 import it.contrader.dto.ConversionDTO;
 import it.contrader.service.ConversionService;
@@ -45,7 +50,8 @@ public class ConversionServlet extends HttpServlet {
 			JSONObject obj;
 			@SuppressWarnings("unchecked")	 ArrayDeque<Map.Entry<String, String>> newdeque =
 					(ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
-			//@SuppressWarnings("unchecked") Map<String,String> map = (Map<String, String>) session.getAttribute("changes");
+			@SuppressWarnings("unused") ArrayList<String> removeElements = 
+					(ArrayList<String>) session.getAttribute("removeElements");
 			
 			ConversionDTO conversiontoinsert = new ConversionDTO( Integer.parseInt(request.getParameter("idUser")), 
 					source, sourceType, outputType, Integer.parseInt(request.getParameter("idChanges")));
@@ -53,11 +59,23 @@ public class ConversionServlet extends HttpServlet {
 			
 			switch (sourceType.toLowerCase()) {
 				case "xml":
-					
+					for(Map.Entry<String, String> tagName : newdeque) {
+							if(removeElements!=null && !removeElements.isEmpty()) {
+								for (String removeTag : removeElements) {
+									Matcher tag = Pattern.compile("\\<" + removeTag + ">(.*?)\\" + "</" 
+											+ removeTag + ">").matcher(source);
+									while(tag.find()) {
+										source = source.replace("<" + removeTag + ">" + tag.group(1) + "</" + removeTag + ">" , "");
+									}
+								}
+							}
 					if(newdeque!=null) {
-						for(Map.Entry<String, String> tagName : newdeque) {
-							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
-							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
+						
+							if(!tagName.getKey().equals(tagName.getValue())) {
+								source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
+								source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
+							}
+							
 						}
 					}
 					obj = XML.toJSONObject(source);
@@ -65,12 +83,29 @@ public class ConversionServlet extends HttpServlet {
 					getServletContext().getRequestDispatcher("/conversion/conversionOutput.jsp").forward(request, response);
 					break;
 				case "json":
+					obj = new JSONObject(source);
+					String xml_output = XML.toString(obj);
+					if(!removeElements.isEmpty()) {
+						for (String removeTag : removeElements) {
+							Matcher tag = Pattern.compile("\\<" + removeTag + ">(.*?)\\" + "</" 
+									+ removeTag + ">").matcher(xml_output);
+							while(tag.find()) {
+								xml_output = xml_output.replace("<" + removeTag + ">" + tag.group(1) + "</" + removeTag + ">" , "");
+							}
+						}
+					}
 					if(newdeque!=null) {
 						for(Map.Entry<String, String> tagName : newdeque) {
-							source = source.replaceAll("\"" +  tagName.getKey() + "\":",  "\"" + tagName.getValue() + "\":");						}
+							if(!tagName.getKey().equals(tagName.getValue())) {
+								xml_output = xml_output.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
+								xml_output = xml_output.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
+							}
+						}
 					}
-					obj = new JSONObject(source);
-					request.setAttribute("output", obj.toString());
+				
+					
+					request.setAttribute("output", xml_output.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+					getServletContext().getRequestDispatcher("/conversion/conversionOutput.jsp").forward(request, response);
 					break;
 				
 				default:
@@ -78,10 +113,8 @@ public class ConversionServlet extends HttpServlet {
 					break;
 					
 			}
-		//getServletContext().getRequestDispatcher("/user/conversionmanager.jsp").forward(request, response);
-		}
-		//super.service(request, response);
-		
+
+		}		
 	}
 
 

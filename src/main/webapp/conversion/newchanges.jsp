@@ -67,5 +67,15 @@
 	 <button type="submit">Save</button>
 	</form>
 
+<script type="text/javascript">
+	let form = document.getElementById('newChanges');
+	
+	form.querySelectorAll(".col-25").forEach(el=>{
+	    el.addEventListener("click", e=>{
+	        el.parentElement.remove()
+	    })
+	})
+</script>
+
 </body>
 </html>
