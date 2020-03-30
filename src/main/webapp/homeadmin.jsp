@@ -31,26 +31,25 @@
 
 <div class="main">
 <h1>Welcome ${user.getUsername()}</h1>
-<p>
+
 Se sei venuto per effettuare una conversione di un file XML o un file JSON sei nel posto giusto! <br>
 Utilizza la NAVBAR per muoverti con libertà all'interno del nostro sito. <br>
 <br>
-<li>Nella pagina User potrai vedere la tua homepage utente;
-<li>Nella pagina Conversione potrai effettuare una nuova conversione da XML a JSON oppure da JSON ad XML;<br>
-<li>Nella pagina MYCONVERSION potrai vedere il log di tutte le tue CONVERSIONI;<br>
-
-	  <%
+<ul>
+<li>Nella pagina User potrai vedere la tua homepage utente;</li>
+<li>Nella pagina Conversione potrai effettuare una nuova conversione da XML a JSON oppure da JSON ad XML;</li>
+<li>Nella pagina MYCONVERSION potrai vedere il log di tutte le tue CONVERSIONI;</li>
+ <%
 	  	UserDTO u1 = (UserDTO) session.getAttribute("user");
 	  	if(u1.getUsertype().equalsIgnoreCase("admin")) { 
-	  %>
+	  		%>
 	  	<li>Per te che sei un nostro ADMIN potrai inserire, modificare, eliminare e vedere tutti gli utenti iscritti al nostro sito,<br>
-    Inoltre potrai vedere tutti i log degli utenti registrati nella pagina ALLCONVERSION.<br>
+    Inoltre potrai vedere tutti i log degli utenti registrati nella pagina ALLCONVERSION.</li>
 	  <% 
 	  	} 
 	  %>
+</ul>
 
-
-</p>
 </div>
 
 
