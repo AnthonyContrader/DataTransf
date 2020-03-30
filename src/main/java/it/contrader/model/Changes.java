@@ -5,6 +5,7 @@ public class Changes {
 	private String changesName;
 	private String changes;
 	private int idUser;
+	private String removedTag;
 	
 	public Changes() {
 		// TODO Auto-generated constructor stub
@@ -21,6 +22,13 @@ public class Changes {
 		this.idUser = idUser;
 		this.changesName = changesName;
 		this.changes = changes;
+	}
+	public Changes(int id, String changesName, String changes, int idUser, String removedTag) {
+		this.id = id;
+		this.idUser = idUser;
+		this.changesName = changesName;
+		this.changes = changes;
+		this.removedTag = removedTag;
 	}
 	
 	public int getId() {
@@ -47,7 +55,13 @@ public class Changes {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	
+	public String getRemovedTag() {
+		return removedTag;
+	}
+	public void setRemovedTag(String removedTag) {
+		this.removedTag = removedTag;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
@@ -81,12 +95,16 @@ public class Changes {
 			return false;
 		}
 		
+		if(removedTag != c.removedTag) {
+			return false;
+		}
+		
 		return true;
 	}
 	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return id + "\t" + changesName + "\t" + changes + "\t" + idUser;
+		return id + "\t" + changesName + "\t" + changes + "\t" + idUser + "\t" + removedTag;
 	}
 }

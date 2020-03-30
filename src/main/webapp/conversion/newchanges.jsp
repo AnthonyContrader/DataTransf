@@ -73,6 +73,7 @@
 	form.querySelectorAll(".col-25").forEach(el=>{
 	    el.addEventListener("click", e=>{
 	        el.parentElement.remove()
+	        
 	    })
 	})
 </script>

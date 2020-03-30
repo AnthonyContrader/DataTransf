@@ -108,7 +108,7 @@ public class ChangesServlet extends HttpServlet {
 				if(!removeElements.isEmpty()) {
 					session.setAttribute("removeElements", removeElements);
 				}
-				service.insert(new ChangesDTO(request.getParameter("changesName"), newdeque.toString(), idUser));
+				service.insert(new ChangesDTO(request.getParameter("changesName"), newdeque.toString(), idUser, removeElements.toString()));
 				getServletContext().getRequestDispatcher("/ConversionServlet?mode=a&idChanges="+ 
 						service.lastId(idUser) + "&idUser=" + idUser).forward(request, response);
 			default:

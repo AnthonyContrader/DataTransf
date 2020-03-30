@@ -10,9 +10,9 @@ import it.contrader.utils.ConnectionSingleton;
 public class ChangesDAO implements DAO<Changes> {
 
 	private final String QUERY_ALL = "SELECT * FROM changes";
-	private final String QUERY_CREATE = "INSERT INTO changes (changesName, changes, idUser) VALUES (?,?,?)";
+	private final String QUERY_CREATE = "INSERT INTO changes (changesName, changes, idUser, removedTag) VALUES (?,?,?,?)";
 	private final String QUERY_READ = "SELECT * FROM changes WHERE id=?";
-	private final String QUERY_UPDATE = "UPDATE changes SET changesName=?, changes=?, idUser=? WHERE id=?";
+	private final String QUERY_UPDATE = "UPDATE changes SET changesName=?, changes=?, idUser=?, removedTag=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM changes WHERE id=?";
 	private final String QUERY_LAST_ID = "SELECT changes.id FROM(SELECT id FROM changes WHERE idUser=? ORDER BY id DESC LIMIT 1)changes ORDER BY changes.id";
 	
@@ -78,6 +78,7 @@ public class ChangesDAO implements DAO<Changes> {
 			preparedStatement.setString(1, dto.getChangesName());
 			preparedStatement.setString(2, dto.getChanges());
 			preparedStatement.setInt(3, dto.getIdUser());
+			preparedStatement.setString(4, dto.getRemovedTag());
 			
 			preparedStatement.execute();
 			
@@ -100,6 +101,7 @@ public class ChangesDAO implements DAO<Changes> {
 			preparedStatement.setString(2, dto.getChanges());
 			preparedStatement.setInt(3, dto.getIdUser());
 			preparedStatement.setInt(4, dto.getIdUser());
+			preparedStatement.setString(5,dto.getRemovedTag());
 			
 			if(preparedStatement.executeUpdate() > 0) {
 				return true;
@@ -133,27 +135,7 @@ public class ChangesDAO implements DAO<Changes> {
 			return false;
 		}
 	}
-	
-	public int insertWithId(Changes dto) {
-		// TODO Auto-generated method stub
-		Connection connection = ConnectionSingleton.getInstance();
 		
-		try {
-			
-			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_LAST_ID);
-			preparedStatement.setString(1, dto.getChangesName());
-			preparedStatement.setString(2, dto.getChanges());
-			preparedStatement.setInt(3, dto.getIdUser());
-			ResultSet resultSet = preparedStatement.executeQuery();
-			System.out.println(resultSet.next());
-			return resultSet.getInt("id");
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-			return -1;
-		}
-	}
-	
 	public int lastId(int idUser) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {

@@ -11,13 +11,13 @@ public class ChangesConverter implements Converter<Changes, ChangesDTO> {
 	@Override
 	public ChangesDTO toDTO(Changes entity) {
 		// TODO Auto-generated method stub
-		return new ChangesDTO(entity.getId(), entity.getChangesName(), entity.getChanges(), entity.getIdUser());
+		return new ChangesDTO(entity.getId(), entity.getChangesName(), entity.getChanges(), entity.getIdUser(), entity.getRemovedTag());
 	}
 
 	@Override
 	public Changes toEntity(ChangesDTO dto) {
 		// TODO Auto-generated method stub
-		return new Changes(dto.getId(), dto.getChangesName(),dto.getChanges(),dto.getIdUser());
+		return new Changes(dto.getId(), dto.getChangesName(),dto.getChanges(),dto.getIdUser(), dto.getRemovedTag());
 	}
 
 	@Override

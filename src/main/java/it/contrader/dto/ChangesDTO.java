@@ -6,6 +6,7 @@ public class ChangesDTO {
 	private String changesName;
 	private String changes;
 	private int idUser;
+	private String removedTag;
 	
 	public ChangesDTO() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +23,19 @@ public class ChangesDTO {
 		this.idUser = idUser;
 		this.changesName = changesName;
 		this.changes = changes;
+	}
+	public ChangesDTO( String changesName, String changes, int idUser, String removedTag) {
+		this.idUser = idUser;
+		this.changesName = changesName;
+		this.changes = changes;
+		this.removedTag = removedTag;
+	}
+	public ChangesDTO(int id, String changesName, String changes, int idUser, String removedTag) {
+		this.id = id;
+		this.idUser = idUser;
+		this.changesName = changesName;
+		this.changes = changes;
+		this.removedTag = removedTag;
 	}
 	
 	public int getId() {
@@ -49,10 +63,18 @@ public class ChangesDTO {
 		this.idUser = idUser;
 	}
 	
+	public String getRemovedTag() {
+		return removedTag;
+	}
+
+	public void setRemovedTag(String removedTag) {
+		this.removedTag = removedTag;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return id + "\t" + changesName + "\t" + changes + "\t" + idUser;
+		return id + "\t" + changesName + "\t" + changes + "\t" + idUser+ "\t" + removedTag;
 	}
 	
 }
