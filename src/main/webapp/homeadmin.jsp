@@ -31,15 +31,26 @@
 
 <div class="main">
 <h1>Welcome ${user.getUsername()}</h1>
+<p>
+Se sei venuto per effettuare una conversione di un file XML o un file JSON sei nel posto giusto! <br>
+Utilizza la NAVBAR per muoverti con libertà all'interno del nostro sito. <br>
+<br>
+<li>Nella pagina User potrai vedere la tua homepage utente;
+<li>Nella pagina Conversione potrai effettuare una nuova conversione da XML a JSON oppure da JSON ad XML;<br>
+<li>Nella pagina MYCONVERSION potrai vedere il log di tutte le tue CONVERSIONI;<br>
+
+	  <%
+	  	UserDTO u1 = (UserDTO) session.getAttribute("user");
+	  	if(u1.getUsertype().equalsIgnoreCase("admin")) { 
+	  %>
+	  	<li>Per te che sei un nostro ADMIN potrai inserire, modificare, eliminare e vedere tutti gli utenti iscritti al nostro sito,<br>
+    Inoltre potrai vedere tutti i log degli utenti registrati nella pagina ALLCONVERSION.<br>
+	  <% 
+	  	} 
+	  %>
 
 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-
+</p>
 </div>
 
 

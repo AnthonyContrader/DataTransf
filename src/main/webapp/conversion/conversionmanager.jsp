@@ -42,13 +42,12 @@ Prima di convertire il messaggio potrai effettuare delle operazioni all'interno:
 
 	<ul>
 		<li>Cambiare il nome dei tag in modo permanente oppure solo per questa conversione;</li>
+		<li>Eliminare i tag inutili;</li>
 		<li>Ordinare i tag in modo tale da averli nella posizione che vuoi.</li>
+		
 	
 	</ul>  
-
-
 </p>
-
 <br>
 
 <a style="color: white; background-color: #00a990; border-radius: 7px; padding: 12px;" href="newconversion.jsp">New Conversion</a>
