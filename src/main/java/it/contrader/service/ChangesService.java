@@ -21,38 +21,38 @@ public class ChangesService implements Service<ChangesDTO>{
 		
 	}
 
-	@Override
+
 	public List<ChangesDTO> getAll() {
 		// Ottiene una lista di entità e le restituisce convertendole in DTO
 		return converter.toDTOList(dao.getAll());
 	}
 
-	@Override
+	
 	public ChangesDTO read(int id) {
 		// Ottiene un'entità e la restituisce convertendola in DTO
 		return converter.toDTO(dao.read(id));
 	}
 
-	@Override
+	
 	public boolean insert(ChangesDTO dto) {
 		// Converte un DTO in entità e lo passa al DAO per l'inserimento
 		return dao.insert(converter.toEntity(dto));
 	}
 
-	@Override
+	
 	public boolean update(ChangesDTO dto) {
 		// Converte un DTO in entità e lo passa al DAO per la modifica
 		return dao.update(converter.toEntity(dto));
 	}
 
-	@Override
+
 	public boolean delete(int id) {
 		// Questo metodo chiama direttamente il DAO
 		return dao.delete(id);
 	}
 
 	public int lastId(int idUser) {
-		// Converte un DTO in entità e lo passa al DAO per l'inserimento
+		// Questo metodo chiama direttamente il DAO per ottenere tutte le modifiche di quell'utente
 		return dao.lastId(idUser);
 	}
 
