@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Data        // Crea Getter e Setter e l'override equal e toString
 @Entity
 public class Conversion {
 	
@@ -28,7 +28,7 @@ public class Conversion {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idConversion;
+	private Long idConversion;
 	
 	@Column(unique = false)
 	private int idUser;
