@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 public class ConversionDTO {
 	
 	private Long idConversion;
-	private int idUser;
+	private Long idUser;
 	private String source;
 	private SourceType sourceType;
 	private OutputType outputType;
-	private int changes;
+	private Long changes;
 
 }
