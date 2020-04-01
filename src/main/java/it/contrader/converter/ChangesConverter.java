@@ -3,9 +3,12 @@ package it.contrader.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import it.contrader.dto.ChangesDTO;
 import it.contrader.model.Changes;
 
+@Component
 public class ChangesConverter implements Converter<Changes, ChangesDTO> {
 
 	@Override

@@ -13,6 +13,6 @@ public class ChangesDTO {
 	private String name;
 	private String changes;
 	private String removed;
-	private int user;
+	private Long user;
 	
 }
