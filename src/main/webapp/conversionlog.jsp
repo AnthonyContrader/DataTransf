@@ -15,24 +15,25 @@
 <h1>Welcome ${user.getUsername()}</h1>
 
 	<div class="navbar">
-	 <a  href="./homeadmin.jsp">Home</a>
-	  <a href="UserServlet?mode=userlist">Users</a>
-	  <a href="conversion/conversionmanager.jsp">Conversions</a>
-	  <a <% if(request.getParameter("mode").equalsIgnoreCase("read")) { %> class="active" <% } %> href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
-	  
-	  <%
-	  	UserDTO u = (UserDTO) session.getAttribute("user");
-	  	if(u.getUsertype().equals(Usertype.ADMIN)) { 
-	  %>
-	  	<a <% if(request.getParameter("mode").equalsIgnoreCase("readAll")) { %> class="active" <% } %> href="ConversionLogServlet?mode=readAll">All Conversion</a>
-	  <% 
-	  	} 
-	  %>
+	 <a  href="/homeadmin.jsp">Home</a>
+	  <a href="/users/getAll">Users</a>
+	  <a href="/conversionmanager.jsp">Conversions</a>
+	   <%
+  		UserDTO u = (UserDTO) session.getAttribute("user");
+  		%>
+		<a class="active" href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
+		<%
+  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
+ 		 %>
+  		<a href="/conversion/findAll">All Conversion</a>
+<%} %>
+
+	
 	  <a href="./LogoutServlet" id="logout">Logout</a>
 	</div>
 
 	<%
-		List<ConversionDTO> list = (List<ConversionDTO>) request.getAttribute("log");
+		List<ConversionDTO> list = (List<ConversionDTO>) request.getSession().getAttribute("Log");
 	%>
 
 	<table>

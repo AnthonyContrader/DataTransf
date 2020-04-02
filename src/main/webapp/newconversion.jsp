@@ -15,20 +15,22 @@
   <a href="./homeadmin.jsp">Home</a>
    <a href="/user/getall">Users</a>
   <a class= "active" href="/conversionmanager.jsp">Conversions</a>
-  <a href="/ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
-   <%
+  <%
   	UserDTO u = (UserDTO) session.getAttribute("user");
+  %>
+		 <a href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
+	<%
   	if(u.getUsertype().equals(Usertype.ADMIN)) { 
   %>
-  	<a href="/ConversionLogServlet?mode=readAll">All Conversion</a>
+  	<a href="/conversion/findAll">All Conversion</a>
   <% 
   	} 
   %>
-  <a href="/LogoutServlet" id="logout">Logout</a>
+		<a href="/user/logout" id="logout">Logout</a>
 </div>
 
  
-<form id="newConversion" action="/newchanges" method="post">
+<form id="newConversion" action="/changes/newchanges" method="post">
 	<div class="row">
     <div class="col-25">
       <label for="source">Source</label>

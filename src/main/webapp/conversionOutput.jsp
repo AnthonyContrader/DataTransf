@@ -17,16 +17,18 @@
   <a href="homeadmin.jsp">Home</a>
   <a href="UserServlet?mode=userlist">Users</a>
   <a class="active" href="./conversion/conversionmanager.jsp">Conversions</a>
-  <a href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
-   <%
+  <%
   	UserDTO u = (UserDTO) session.getAttribute("user");
+  %>
+		 <a href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
+	<%
   	if(u.getUsertype().equals(Usertype.ADMIN)) { 
   %>
-  	<a href="../ConversionLogServlet?mode=readAll">All Conversion</a>
+  	<a href="/conversion/findAll">All Conversion</a>
   <% 
   	} 
   %>
-  <a href="LogoutServlet" id="logout">Logout</a>
+  <a href="/user/Logout" id="logout">Logout</a>
 </div>
 
 <h1>Il risultato della tua conversione è questo </h1>
