@@ -1,3 +1,4 @@
+<%@page import="it.contrader.model.User.Usertype"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="it.contrader.dto.ConversionDTO, it.contrader.dto.UserDTO"
     import="java.util.List"
@@ -21,7 +22,7 @@
 	  
 	  <%
 	  	UserDTO u = (UserDTO) session.getAttribute("user");
-	  	if(u.getUsertype().equalsIgnoreCase("admin")) { 
+	  	if(u.getUsertype().equals(Usertype.ADMIN)) { 
 	  %>
 	  	<a <% if(request.getParameter("mode").equalsIgnoreCase("readAll")) { %> class="active" <% } %> href="ConversionLogServlet?mode=readAll">All Conversion</a>
 	  <% 
