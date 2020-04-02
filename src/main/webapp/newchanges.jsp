@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.Map"
     import="it.contrader.dto.UserDTO,java.util.ArrayDeque" %>
+    <%@page import="it.contrader.model.User.Usertype"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +15,20 @@
 
 <div class="navbar">
   <a href="homeadmin.jsp">Home</a>
-  <a href="UserServlet?mode=userlist">Users</a>
-  <a class="active" href="../conversion/conversionmanager.jsp">Conversions</a>
-  <a href="ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
-  
-  <a href="LogoutServlet" id="logout">Logout</a>
+  <a href="/user/getAll">Users</a>
+  <a class="active" href="/conversionmanager.jsp">Conversions</a>
+ <%
+  	UserDTO u = (UserDTO) request.getSession().getAttribute("user");
+  %>
+		 <a href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
+	<%
+  	if(u.getUsertype().equals(Usertype.ADMIN)) { 
+  %>
+  	<a href="/conversion/findAll">All Conversion</a>
+  <% 
+  	} 
+  %>
+		<a href="/user/logout" id="logout">Logout</a>
 </div>
 
 	<%
