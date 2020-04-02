@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.dto.ConversionDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.model.Conversion.SourceType;
 import it.contrader.service.ConvService;
@@ -42,6 +43,14 @@ public class ConversionController {
 		
 		String source = session.getAttribute("source").toString();
 		
+		ConversionDTO dto = new ConversionDTO();
+		
+		dto.setIdUser(user.getId());
+		dto.setChanges(Long.parseLong(session.getAttribute("lastChangesId").toString()));
+		dto.setSourceType(sourceType);
+		dto.setOutputType(outputType);
+		dto.setSource(source);
+		
 		@SuppressWarnings("unchecked")
 		ArrayDeque<Map.Entry<String, String>> changes = (ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes"); 
 		
@@ -58,6 +67,7 @@ public class ConversionController {
 			break;
 		}
 		
+		service.insert(dto);
 		
 		return "conversionOutput";
 		

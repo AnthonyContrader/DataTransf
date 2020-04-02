@@ -20,11 +20,7 @@ public class Conversion {
 		
 		XML, JSON
 	}
-
-	public enum OutputType{
-		
-		XML, JSON, CSV
-	}
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +30,7 @@ public class Conversion {
 	private Long idUser;
 	private String source;
 	private SourceType sourceType;
-	private OutputType outputType;
+	private SourceType outputType;
 	private Long changes;
 	
 }

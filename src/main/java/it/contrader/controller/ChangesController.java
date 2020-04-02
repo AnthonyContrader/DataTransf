@@ -154,6 +154,8 @@ public class ChangesController {
 		//Salvo il changes DTO all'interno del database mediante la chiamata insert del ChangesService
 		service.insert(dto);
 		
+		session.setAttribute("lastChangesId",service.getLastId(user.getId()));
+		
 		return "redirect:/conversion/newconversion";
 	}
 	

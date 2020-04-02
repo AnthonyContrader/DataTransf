@@ -14,7 +14,7 @@ public class ConversionDTO {
 	private Long idUser;
 	private String source;
 	private SourceType sourceType;
-	private OutputType outputType;
+	private SourceType outputType;
 	private Long changes;
 
 }
