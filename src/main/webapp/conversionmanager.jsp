@@ -44,7 +44,7 @@ Prima di convertire il messaggio potrai effettuare delle operazioni all'interno:
 </p>
 <br>
 
-<a style="color: white; background-color: #00a990; border-radius: 7px; padding: 12px;" href="newconversion.jsp">New Conversion</a>
+<a style="color: white; background-color: #00a990; border-radius: 7px; padding: 12px;" href="/newconversion.jsp">New Conversion</a>
 
 </div>
 

@@ -1,3 +1,4 @@
+<%@page import="it.contrader.model.User.Usertype"%>
 <%@ page import="it.contrader.dto.UserDTO" import="java.util.*"%>
 <html>
 <head>
@@ -16,6 +17,16 @@
 	<div class="navbar">
 		<a href="/homeadmin.jsp">Home</a> 
 		<a class="active" href="/user/getall">Users</a> 
+		 <a href="/conversionmanager.jsp">Conversions</a>
+  <a href="/ConversionLogServlet?mode=read&userId=${user.getId()}&usertype=${user.getUsertype()}">My Conversion</a>
+   <%
+  	UserDTO u1 = (UserDTO) session.getAttribute("user");
+  	if(u1.getUsertype().equals(Usertype.ADMIN)) { 
+  %>
+  	<a href="/ConversionLogServlet?mode=readAll">All Conversion</a>
+  <% 
+  	} 
+  %>
 		<a href="/user/logout" id="logout">Logout</a>
 	</div>
 	<div class="main">

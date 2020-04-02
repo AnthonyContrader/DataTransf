@@ -18,8 +18,8 @@
 
 
 <body class="text-center">
+	<%@include file="css/header.jsp"%>
 	<form class="login" action="/user/login" method="post">
-		<h1>SAMPLE LOGIN</h1>
 
 		<label for="inputUser" class="sr-only">Username</label> <input
 			type="text" name="username" id="inputUser" class="form-control"
