@@ -34,6 +34,8 @@ public class ChangesController {
 			@RequestParam(value = "outputType", required = true) String outputType, 
 			@RequestParam(value = "source", required = true) String source) {
 		
+		System.out.println("test");
+		
 		//Recupero la sessione corrente
 		final HttpSession session = request.getSession();
 		
@@ -84,9 +86,6 @@ public class ChangesController {
 			  }
 			session.setAttribute("changes", deque);
 			break;
-
-		default:
-			break;
 		}
 		
 		//eseguo il redirect alla pagina newchanges
@@ -96,6 +95,8 @@ public class ChangesController {
 	@PostMapping("/save")
 	public String saveChanges(HttpServletRequest request, 
 			@RequestParam(value = "changesName", required = false) String changesName) {
+		
+		System.out.println("save");
 		
 		//Recupero la sessione corrente
 		final HttpSession session = request.getSession();
