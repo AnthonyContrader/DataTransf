@@ -31,7 +31,7 @@
 
 <h1>Il risultato della tua conversione è questo </h1>
 
-<p> <%=request.getAttribute("output")%> </p>
+<p> <%=session.getAttribute("output")%> </p>
 
 
 </body>

@@ -153,7 +153,7 @@ public class ChangesController {
 		//Salvo il changes DTO all'interno del database mediante la chiamata insert del ChangesService
 		service.insert(dto);
 		
-		return "homeadmin";
+		return "redirect:/conversion/newconversion";
 	}
 	
 }

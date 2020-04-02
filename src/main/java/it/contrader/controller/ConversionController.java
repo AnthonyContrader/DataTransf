@@ -14,13 +14,11 @@ import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.contrader.dto.ConversionDTO;
 import it.contrader.dto.UserDTO;
-import it.contrader.model.Conversion.*;
+import it.contrader.model.Conversion.SourceType;
 import it.contrader.service.ConvService;
 
 @Controller
@@ -30,82 +28,36 @@ public class ConversionController {
 	@Autowired
 	private ConvService service;
 	
+	@GetMapping("/newconversion")
+	public String newconversion(HttpServletRequest request) {
 
-	@PostMapping("/newconversion")
-	public String insert(HttpServletRequest request) { 
-		final HttpSession session = request.getSession();
-		UserDTO user =(UserDTO)session.getAttribute("user");
+		HttpSession session = request.getSession();
+
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+		
+		System.out.println("sourcetype element: " + session.getAttribute("sourceType").toString());
+		
+		SourceType sourceType = getSourceType(session.getAttribute("sourceType").toString());
+		SourceType outputType = getSourceType(session.getAttribute("outputType").toString());
+		
 		String source = session.getAttribute("source").toString();
 		
-		ConversionDTO dto = new ConversionDTO();
-		dto.setIdUser(user.getId());
-		dto.setSource((String) session.getAttribute("source"));
-		dto.setSourceType((SourceType) session.getAttribute("sourceType"));
-		dto.setOutputType((OutputType) session.getAttribute("outputType"));
-		dto.setChanges((Long) session.getAttribute("idChanges"));
-		service.insert(dto);
+		@SuppressWarnings("unchecked")
+		ArrayDeque<Map.Entry<String, String>> changes = (ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes"); 
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<String> removeElements = (ArrayList<String>) session.getAttribute("removeElements");
+		
+		switch (sourceType) {
+		case XML:
+			session.setAttribute("output", xml2Json(source, changes, removeElements)); 
+			break;
 
-		JSONObject obj;
-		@SuppressWarnings("unchecked")	ArrayDeque<Map.Entry<String, String>> newdeque =
-				(ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
-		@SuppressWarnings("unchecked") ArrayList<String> removeElements = 
-				(ArrayList<String>) session.getAttribute("removeElements");
+		case JSON:
+			session.setAttribute("output", json2xml(source, changes, removeElements));
+			break;
+		}
 		
-		
-		switch (dto.getSourceType()) {
-		
-			case XML:
-				for(Map.Entry<String, String> tagName : newdeque) {
-						if(removeElements!=null && !removeElements.isEmpty()) {
-							for (String removeTag : removeElements) {
-								Matcher tag = Pattern.compile("\\<" + removeTag + ">(.*?)\\" + "</" 
-										+ removeTag + ">").matcher(source);
-								while(tag.find()) {
-									source = source.replace("<" + removeTag + ">" + tag.group(1) + "</" + removeTag + ">" , "");
-								}
-							}
-						}
-				if(newdeque!=null) {
-					
-						if(!tagName.getKey().equals(tagName.getValue())) {
-							source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
-							source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
-						}
-						
-					}
-				}
-				obj = XML.toJSONObject(source);
-				request.setAttribute("output", obj.toString());
-				break;
-			case JSON:
-				obj = new JSONObject(source);
-				String xml_output = XML.toString(obj);
-				if(!removeElements.isEmpty()) {
-					for (String removeTag : removeElements) {
-						Matcher tag = Pattern.compile("\\<" + removeTag + ">(.*?)\\" + "</" 
-								+ removeTag + ">").matcher(xml_output);
-						while(tag.find()) {
-							xml_output = xml_output.replace("<" + removeTag + ">" + tag.group(1) + "</" + removeTag + ">" , "");
-						}
-					}
-				}
-				if(newdeque!=null) {
-					for(Map.Entry<String, String> tagName : newdeque) {
-						if(!tagName.getKey().equals(tagName.getValue())) {
-							xml_output = xml_output.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
-							xml_output = xml_output.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
-						}
-					}
-				}
-			
-				
-				session.setAttribute("output", xml_output.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
-				break;
-			
-			default:
-				session.setAttribute("output", "incorrect input type");
-				break;
-				}
 		
 		return "conversionOutput";
 		
@@ -124,5 +76,77 @@ public class ConversionController {
 		return "conversionlog";
 		
 	}
+	
+	public SourceType getSourceType(String type) {
+		
+		SourceType sourceType = null;
+		
+		switch (type.toUpperCase()) {
+		case "XML":
+			sourceType = SourceType.XML;
+			break;
+		case "JSON":
+			sourceType = SourceType.JSON;
+		}
+		
+		return sourceType;
+		
+	}
+	
+	
+	public String xml2Json(String source, ArrayDeque<Map.Entry<String, String>> changes, ArrayList<String> removeElements) {
+
+		JSONObject obj;
+
+		for(Map.Entry<String, String> tagName : changes) {
+			if(removeElements!=null && !removeElements.isEmpty()) {
+				for (String removeTag : removeElements) {
+					Matcher tag = Pattern.compile("\\<" + removeTag + ">(.*?)\\" + "</" 
+							+ removeTag + ">").matcher(source);
+					while(tag.find()) {
+						source = source.replace("<" + removeTag + ">" + tag.group(1) + "</" + removeTag + ">" , "");
+					}
+				}
+			}
+			if(changes!=null) {
+		
+				if(!tagName.getKey().equals(tagName.getValue())) {
+					source = source.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
+					source = source.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
+				}
+			
+			}
+		}
+		obj = XML.toJSONObject(source);
+		
+		return obj.toString();
+	
+	}
+	
+	public String json2xml(String source, ArrayDeque<Map.Entry<String, String>> changes, ArrayList<String> removeElements) {
+		
+		JSONObject obj = new JSONObject(source);
+		String xml_output = XML.toString(obj);
+		if(!removeElements.isEmpty()) {
+			for (String removeTag : removeElements) {
+				Matcher tag = Pattern.compile("\\<" + removeTag + ">(.*?)\\" + "</" 
+						+ removeTag + ">").matcher(xml_output);
+				while(tag.find()) {
+					xml_output = xml_output.replace("<" + removeTag + ">" + tag.group(1) + "</" + removeTag + ">" , "");
+				}
+			}
+		}
+		if(changes!=null) {
+			for(Map.Entry<String, String> tagName : changes) {
+				if(!tagName.getKey().equals(tagName.getValue())) {
+					xml_output = xml_output.replaceAll("<" +  tagName.getKey() + ">",  "<" + tagName.getValue() + ">");
+					xml_output = xml_output.replaceAll("</" +  tagName.getKey() + ">",  "</" + tagName.getValue() + ">");
+				}
+			}
+		}
+		
+		return xml_output.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	}
+	
 }
 
