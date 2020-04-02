@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,20 +21,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.contrader.dto.ConversionDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.model.Conversion.*;
-import it.contrader.service.ConversionService;
+import it.contrader.service.ConvService;
 
 @Controller
 @RequestMapping("/conversion")
 public class ConversionController {
 	
 	@Autowired
-	private ConversionService service;
+	private ConvService service;
 	
-	
-
 
 	@PostMapping("/newconversion")
-	public String insert(HttpServletRequest request,@RequestParam(value = "mode", required = true) String choice) { 
+	public String insert(HttpServletRequest request) { 
 		final HttpSession session = request.getSession();
 		UserDTO user =(UserDTO)session.getAttribute("user");
 		String source = session.getAttribute("source").toString();
@@ -46,13 +45,10 @@ public class ConversionController {
 		dto.setChanges((Long) session.getAttribute("idChanges"));
 		service.insert(dto);
 
-		switch(choice.toLowerCase()) {
-	
-	case "a":
 		JSONObject obj;
 		@SuppressWarnings("unchecked")	ArrayDeque<Map.Entry<String, String>> newdeque =
 				(ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
-		@SuppressWarnings("unused") ArrayList<String> removeElements = 
+		@SuppressWarnings("unchecked") ArrayList<String> removeElements = 
 				(ArrayList<String>) session.getAttribute("removeElements");
 		
 		
@@ -110,8 +106,22 @@ public class ConversionController {
 				session.setAttribute("output", "incorrect input type");
 				break;
 				}
-		}
+		
 		return "conversionOutput";
+		
+	}
+	
+	@GetMapping("/findAll")
+	public String findAll(HttpServletRequest request) {
+		request.getSession().setAttribute("Log", service.getAll());
+		return "conversionlog";
+
+}
+	
+	@GetMapping("/findAllByIdUser")
+	public String findAllByIdUser(HttpServletRequest request, @RequestParam(value = "idUser", required = true) Long idUser){
+		request.getSession().setAttribute("Log", service.findAllByIdUser(idUser));
+		return "conversionlog";
 		
 	}
 }

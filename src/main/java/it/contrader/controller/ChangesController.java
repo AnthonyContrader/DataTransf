@@ -47,7 +47,7 @@ public class ChangesController {
 		
 		/*
 		 * Instanzio un array deque contenente elementi di tipo key value, mi servira per salvar i tag del sorgente 
-		 * e ad attribuire il nuovo valore per ogniuno di essi in futuro
+		 * e ad attribuire il nuovo valore per ognuno di essi in futuro
 		 */
 		ArrayDeque<Map.Entry<String, String>> deque = new ArrayDeque<Map.Entry<String,String>>();
 		Matcher m;

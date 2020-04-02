@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import it.contrader.model.Conversion;
 
-@Repository
-@Transactional
+@Repository 
+@Transactional //per automatizzare gli accessi al database.
 public interface ConversionRepository extends CrudRepository<Conversion, Long> {
-
+		
+	Iterable<Conversion> findAllByIdUser(Long idUser);
 }
