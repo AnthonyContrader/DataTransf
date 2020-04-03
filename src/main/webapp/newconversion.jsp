@@ -36,7 +36,7 @@
       <label for="source">Source</label>
     </div>
     <div class="col-75">
-    <input type="text" name="source">
+    <textarea rows="4" cols="50" name="source"> </textarea>
     </div>
   </div>
   <div class="row">
