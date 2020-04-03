@@ -24,21 +24,21 @@
 
 
 	<div class="navbar">
-		<a class="active" href="/homeadmin.jsp">Home</a> 
-		<a href=/user/getall>Users</a>
-		<a href="/conversionmanager.jsp">Conversion</a>
-	<%
-  	UserDTO u = (UserDTO) session.getAttribute("user");
-  	%>
-		 <a href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
-	<%
+	  <a class="active" href="/homeadmin.jsp">Home</a>
+	  <a href="/users/getAll">Users</a>
+	  <a href="/conversionmanager.jsp">Conversions</a>
+	   	<%
+  		UserDTO u = (UserDTO) session.getAttribute("user");
+  		%>
+			<a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
+		<%
   		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 	%>
-  	<a href="/conversion/findAll">All Conversion</a>
-  	<% 
-  		} 
-  	%>
-		<a href="/user/logout" id="logout">Logout</a>
+ 		%>
+  			<a href="/conversion/findAll">All Conversion</a>
+		<%
+			} 
+		%>
+	  <a href="/user/logout" id="logout">Logout</a>
 	</div>
 
 	<div class="main">
