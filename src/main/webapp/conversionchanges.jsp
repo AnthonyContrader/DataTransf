@@ -14,7 +14,7 @@
 
 <div class="navbar">
 	  <a href="/homeadmin.jsp">Home</a>
-	  <a href="/users/getAll">Users</a>
+	  <a href="/user/getall">Users</a>
 	  <a class="active" href="/conversionmanager.jsp">Conversions</a>
 	   	<%
   		UserDTO u = (UserDTO) session.getAttribute("user");
