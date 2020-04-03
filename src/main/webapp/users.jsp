@@ -49,26 +49,50 @@
 				<th></th>
 				<th></th>
 			</tr>
-			<%
+					<%
+  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
+ 		%>
+ 		
+ 		<%
 				for (UserDTO dto : list) {
 			%>
+			<tr>
+				<td><a href="/user/read?id=<%=dto.getId()%>"> <%=dto.getUsername()%>
+				</a></td>
+				<td><%=dto.getPassword()%></td>
+				<td><%=dto.getUsertype()%></td>
+		   	    <td><a href="/user/preupdate?id=<%=dto.getId()%>">Edit</a></td>
+				<td><a href="/user/delete?id=<%=dto.getId()%>">Delete</a></td>
+
+			</tr>
+			<%
+				}
+			%>
+ 		
+		<%
+			} else {
+			
+		%>
 			<tr>
 				<td><a href="/user/read?id=<%=u.getId()%>"> <%=u.getUsername()%>
 				</a></td>
 				<td><%=u.getPassword()%></td>
 				<td><%=u.getUsertype()%></td>
-				<td><a href="/user/preupdate?id=<%=u.getId()%>">Edit</a></td>
-
-
+		   	    <td><a href="/user/preupdate?id=<%=u.getId()%>">Edit</a></td>
 				<td><a href="/user/delete?id=<%=u.getId()%>">Delete</a></td>
 
 			</tr>
 			<%
 				}
 			%>
+			
+
 		</table>
-
-
+		
+	 
+	    <%
+  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
+ 		%>
 
 		<form id="floatright" action="/user/insert" method="post">
 			<div class="row">
@@ -103,6 +127,10 @@
 			</div>
 			<button type="submit">Insert</button>
 		</form>
+
+			<%
+				}
+			%>
 
 	</div>
 	<br>
