@@ -29,15 +29,15 @@
 		<a href="/conversionmanager.jsp">Conversion</a>
 	<%
   	UserDTO u = (UserDTO) session.getAttribute("user");
-  %>
+  	%>
 		 <a href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
 	<%
-  	if(u.getUsertype().equals(Usertype.ADMIN)) { 
-  %>
+  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
+ 	%>
   	<a href="/conversion/findAll">All Conversion</a>
-  <% 
-  	} 
-  %>
+  	<% 
+  		} 
+  	%>
 		<a href="/user/logout" id="logout">Logout</a>
 	</div>
 

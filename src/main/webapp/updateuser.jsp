@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO,it.contrader.model.User.Usertype"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +14,29 @@
 </head>
 <body>
 <%@ include file="./css/header.jsp" %>
+
 <div class="navbar">
-  <a href="/homeadmin.jsp">Home</a>
-  <a class="active" href="/user/getall">Users</a>
-  <a href="/user/logout" id="logout">Logout</a>
+	  <a href="/homeadmin.jsp">Home</a>
+	  <a href="/users/getAll">Users</a>
+	  <a href="/conversionmanager.jsp">Conversions</a>
+	   	<%
+  		UserDTO u = (UserDTO) session.getAttribute("user");
+  		%>
+			<a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
+		<%
+  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
+ 		%>
+  			<a href="/conversion/findAll">All Conversion</a>
+		<%
+			} 
+		%>
+	  <a href="/user/logout" id="logout">Logout</a>
 </div>
+
 <br>
 <div class="main">
 
-<%UserDTO u = (UserDTO) request.getSession().getAttribute("dto");%>
+<%UserDTO uDto = (UserDTO) request.getSession().getAttribute("dto");%>
 
 
 <form id="floatleft" action="/user/update" method="post">
@@ -49,8 +63,8 @@
     </div>
    		 <div class="col-75">
  			<select id="type" name="usertype">
-  				<option value="ADMIN" <%if(u.getUsertype().toString().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
-  				<option value="USER" <%if(u.getUsertype().toString().equals("USER")) {%>selected<%}%>>USER</option>
+  				<option value="ADMIN" <%if(uDto.getUsertype().toString().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
+  				<option value="USER" <%if(uDto.getUsertype().toString().equals("USER")) {%>selected<%}%>>USER</option>
 			</select>
     	</div>
     	<input type="hidden" name="id" value =<%=u.getId() %>>

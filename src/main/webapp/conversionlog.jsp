@@ -12,24 +12,26 @@
 </head>
 <body><%@ include file="../css/header.jsp" %>
 
+<% String active = session.getAttribute("active").toString(); System.out.println(active); %>
+
 <h1>Welcome ${user.getUsername()}</h1>
 
 	<div class="navbar">
-	 <a  href="/homeadmin.jsp">Home</a>
+	  <a  href="/homeadmin.jsp">Home</a>
 	  <a href="/users/getAll">Users</a>
 	  <a href="/conversionmanager.jsp">Conversions</a>
-	   <%
+	   	<%
   		UserDTO u = (UserDTO) session.getAttribute("user");
   		%>
-		<a class="active" href="/conversion/findAllByIdUser?idUser=${u.getId()}">My Conversion</a>
+		<a <% if(active.equals("myConversion")) { %> class="active" <% } %> href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
 		<%
   		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		 %>
-  		<a href="/conversion/findAll">All Conversion</a>
-<%} %>
-
-	
-	  <a href="./LogoutServlet" id="logout">Logout</a>
+ 		%>
+  		<a <% if(active.equals("findAll")) { %> class="active" <% } %> href="/conversion/findAll">All Conversion</a>
+		<%
+			} 
+		%>
+	  <a href="/user/logout" id="logout">Logout</a>
 	</div>
 
 	<%
@@ -39,7 +41,6 @@
 	<table>
 		<tr>
 			<th>ID</th>
-			<th>Source</th>
 			<th>Source Type</th>
 			<th>Output Type</th>
 			<th>Changes Id</th>
@@ -49,8 +50,7 @@
 		%>
 		<tr>
 			<td><%=c.getIdConversion()%></td>
-			<td><%=c.getSource()%></td>
-			<td><%=c.getSourceType()%></td>
+			<td><%=c.getSourceType() %></td>
 			<td><%=c.getOutputType()%></td>
 			<td><%=c.getChanges()%></td>
 		</tr>

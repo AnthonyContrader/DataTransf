@@ -76,6 +76,7 @@ public class ConversionController {
 	@GetMapping("/findAll")
 	public String findAll(HttpServletRequest request) {
 		request.getSession().setAttribute("Log", service.getAll());
+		request.getSession().setAttribute("active", "findAll");
 		return "conversionlog";
 
 }
@@ -83,6 +84,7 @@ public class ConversionController {
 	@GetMapping("/findAllByIdUser")
 	public String findAllByIdUser(HttpServletRequest request, @RequestParam(value = "idUser", required = true) Long idUser){
 		request.getSession().setAttribute("Log", service.findAllByIdUser(idUser));
+		request.getSession().setAttribute("active", "myConversion");
 		return "conversionlog";
 		
 	}
