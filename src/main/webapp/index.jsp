@@ -10,10 +10,12 @@
 <title>Login</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->	
 
 <!-- Custom styles for this template -->
-<link href="/css/vittoriostyle.css" rel="stylesheet">
+<!-- <link href="/css/vittoriostyle.css" rel="stylesheet"> -->
+
+<link href="/css/loginstyles.css" rel="stylesheet">
 </head>
 
 

@@ -68,8 +68,31 @@
 	<%
 		}
 	%>
+	<%
+		ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition = (ArrayDeque<Map.Entry<String, ArrayDeque<String>>>) session.getAttribute("tagPosition");
+		
+		if(tagPosition != null){
+	%>
+	<p style="border-top-style: solid; border-top-color: #00a990; padding-top: 12px;"> Modifica la posizione dei tag: </p> 
+	<%
+			for(Map.Entry<String, ArrayDeque<String>> tag : tagPosition){
+	%>
+		<div class="row">
+			<div class="col-25">
+	      <label for="tag position <%=tag.getKey()%>"><%=tag.getKey()%></label>
+	    </div>
+	    <div class="col-75" style="width: 70%">
+	    	<input type="text" name="tag position <%=tag.getKey()%>" placeholder="<%=tag.getValue()%>" >
+	    </div>
+		</div>
+	<%
+			}
+		}
+	%>
+	
 	 <button type="submit">Save</button>
 	</form>
+
 
 <script type="text/javascript">
 	let form = document.getElementById('newChanges');

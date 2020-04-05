@@ -3,6 +3,7 @@ package it.contrader.controller;
 import java.util.AbstractMap;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,8 +34,6 @@ public class ChangesController {
 	public String newChanges(HttpServletRequest request, @RequestParam(value = "sourceType", required = true) String typeIn, 
 			@RequestParam(value = "outputType", required = true) String outputType, 
 			@RequestParam(value = "source", required = true) String source) {
-		
-		System.out.println("test");
 		
 		//Recupero la sessione corrente
 		final HttpSession session = request.getSession();
@@ -69,6 +68,7 @@ public class ChangesController {
 				    }
 			  }
 	
+			session.setAttribute("tagPosition", TagPosition(deque, source));
 			//Salvo nella sessione l'array deque key value in modo da utiizzarlo liberamente durante le varie fasi di conversione
 			session.setAttribute("changes", deque);
 			break;
@@ -82,8 +82,11 @@ public class ChangesController {
 						    new AbstractMap.SimpleEntry<String, String>(m.group(1), m.group(1));
 				    if(!deque.contains(entry) && !m.group(1).startsWith("/")) {
 				    	deque.addLast(entry);
-				    	}
+				    }
 			  }
+			  
+			session.setAttribute("tagPosition", TagPosition(deque, xml));
+			  
 			session.setAttribute("changes", deque);
 			break;
 		}
@@ -92,11 +95,10 @@ public class ChangesController {
 		return "newchanges";
 	}
 	
+	
 	@PostMapping("/save")
 	public String saveChanges(HttpServletRequest request, 
 			@RequestParam(value = "changesName", required = false) String changesName) {
-		
-		System.out.println("save");
 		
 		//Recupero la sessione corrente
 		final HttpSession session = request.getSession();
@@ -118,7 +120,8 @@ public class ChangesController {
 		}
 		
 		//Recupero dalla sessione l'array deque contenente tutti i nomi dei tag all'interno del source
-		@SuppressWarnings("unchecked") ArrayDeque<Map.Entry<String, String>> newdeque = (ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
+		@SuppressWarnings("unchecked") ArrayDeque<Map.Entry<String, String>> newdeque = 
+				(ArrayDeque<Map.Entry<String, String>>) session.getAttribute("changes");
 		
 		//Creo un array list che usero per inserire all'interno i tag che dovro rimuovere dalla conversione
 		ArrayList<String> removeElements = new ArrayList<String>();
@@ -136,6 +139,21 @@ public class ChangesController {
 			
 		}
 		
+		@SuppressWarnings("unchecked")
+		ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition = 
+				(ArrayDeque<Map.Entry<String, ArrayDeque<String>>>) session.getAttribute("tagPosition");
+		
+		
+		for (Map.Entry<String, ArrayDeque<String>> entry : tagPosition) {
+			if(request.getParameter("tag position " + entry.getKey()) != "") {
+				
+				
+				String tmpTagPosition = request.getParameter("tag position " + entry.getKey());
+				
+				session.setAttribute("tag position " + entry.getKey(), tmpTagPosition);
+			}
+		}
+		
 		//salvo nella sessione il nuovo array deque contenente i nuovi nomi dei tag 
 		session.setAttribute("changes", newdeque);
 		
@@ -151,12 +169,85 @@ public class ChangesController {
 			dto.setRemoved(removeElements.toString());
 		}
 		
+		
+		
 		//Salvo il changes DTO all'interno del database mediante la chiamata insert del ChangesService
 		service.insert(dto);
 		
 		session.setAttribute("lastChangesId",service.getLastId(user.getId()));
 		
 		return "redirect:/conversion/newconversion";
+	}
+	
+	public static ArrayDeque<String> mapXml(String soString, String tag) {
+		ArrayDeque<String> array = new ArrayDeque<String>();
+		Matcher m = Pattern.compile("\\<"+ tag + ">" +"(.*?)\\</" + tag + ">").matcher(soString);
+		
+		while(m.find()) {
+			if(m.group(1).contains("</")) {
+				Matcher nestedTag = Pattern.compile("\\<(.*?)\\>").matcher(m.group(1));
+				while(nestedTag.find()) {
+					if(!nestedTag.group(1).startsWith("/")) {
+						if(!array.contains(nestedTag.group(1))) {
+							array.addLast(nestedTag.group(1));
+						}
+					}
+				}
+			}
+		}
+		
+		return array;
+		
+	}
+
+	public  ArrayDeque<Map.Entry<String, ArrayDeque<String>>> clearMap(ArrayDeque<Map.Entry<String, 
+			ArrayDeque<String>>> tagMapTmp){
+		 
+		ArrayDeque<Map.Entry<String, ArrayDeque<String>>> clearMap = new ArrayDeque<Map.Entry<String,ArrayDeque<String>>>();
+		HashMap<String, ArrayDeque<String>> tmpList = new HashMap<String, ArrayDeque<String>>();
+		 
+		 for (Map.Entry<String, ArrayDeque<String>> entity : tagMapTmp) {
+			if(!entity.getValue().isEmpty()) {
+				tmpList.put(entity.getKey(), entity.getValue());
+			}
+		 }
+
+		for(Map.Entry<String, ArrayDeque<String>> entry : tmpList.entrySet()) {
+			 ArrayDeque<String> tmp = entry.getValue().clone();   
+			 for(String s : entry.getValue()) {
+			    	if(tmpList.containsKey(s)) {
+			    		tmp.removeAll(tmpList.get(s));
+			    	}
+			    }
+			 entry.setValue(tmp);
+		}
+		 
+		 for (Map.Entry<String, ArrayDeque<String>> entity : tagMapTmp) {
+				if(!entity.getValue().isEmpty()) {
+					new AbstractMap.SimpleEntry<String, ArrayDeque<String>>(entity.getKey(), tmpList.get(entity.getKey()));
+					clearMap.addLast(new AbstractMap.SimpleEntry<String, ArrayDeque<String>>(entity.getKey(), 
+							tmpList.get(entity.getKey())));
+				}
+		}
+
+		 return clearMap;
+	}
+
+	public ArrayDeque<Map.Entry<String, ArrayDeque<String>>> TagPosition(ArrayDeque<Map.Entry<String, String>> tagList, 
+			String xml) {
+		
+		 ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition = new ArrayDeque<Map.Entry<String, ArrayDeque<String>>>();
+		
+		 ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagMapTmp = new ArrayDeque<Map.Entry<String,ArrayDeque<String>>>();
+		  
+		 for (Map.Entry<String, String> string : tagList) {
+			  tagMapTmp.addLast(new AbstractMap.SimpleEntry<String, ArrayDeque<String>>(string.getKey(), 
+					  mapXml(xml, string.getKey())));
+		 }
+		
+		tagPosition = clearMap(tagMapTmp);
+		  
+		return tagPosition;	
 	}
 	
 }
