@@ -15,7 +15,6 @@
 <!-- Custom styles for this template -->
 <link href="/css/vittoriostyle.css" rel="stylesheet">
 
-<link href="/css/loginstyles.css" rel="stylesheet">
 </head>
 
 
