@@ -47,9 +47,15 @@ public class UserController {
 
 	@GetMapping("/delete")
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
+		UserDTO user = (UserDTO)request.getSession().getAttribute("user");
 		service.delete(id);
 		setAll(request);
+		
+		if (id != user.getId()) {	
 		return "users";
+		} else {
+			return "index";
+		}
 	}
 
 	@GetMapping("/preupdate")
@@ -68,9 +74,11 @@ public class UserController {
 		dto.setPassword(password);
 		dto.setUsertype(usertype);
 		service.update(dto);
-		//request.getSession().setAttribute("user", dto);
 		setAll(request);
-		return "users";
+		getAll(request);
+		updateUser(request, dto.getId());
+		
+		return "homeadmin";
 
 	}
 
@@ -83,6 +91,7 @@ public class UserController {
 		dto.setUsertype(usertype);
 		service.insert(dto);
 		setAll(request);
+		getAll(request);
 		return "users";
 	}
 
@@ -101,4 +110,10 @@ public class UserController {
 	private void setAll(HttpServletRequest request) {
 		request.getSession().setAttribute("list", service.getAll());
 	}
+	
+private void updateUser (HttpServletRequest request, @RequestParam("id") Long id) {
+	UserDTO dto = new UserDTO (); 
+	dto = service.read(id);
+	request.getSession().setAttribute("user", dto);
+}
 }
