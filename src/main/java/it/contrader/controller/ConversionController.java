@@ -61,11 +61,11 @@ public class ConversionController {
 		
 		switch (sourceType) {
 		case XML:
-			session.setAttribute("output", xml2Json(tagPositionChange(session, source, tagPosition), changes, removeElements));
-			break;
+			session.setAttribute("output", xml2Json(tagPositionChange(source, tagPosition), changes, removeElements));
+			break;	
 
 		case JSON:
-			session.setAttribute("output", json2xml(source, changes, removeElements, session, tagPosition));
+			session.setAttribute("output", json2xml(source, changes, removeElements, tagPosition));
 			break;
 		}
 		
@@ -109,9 +109,7 @@ public class ConversionController {
 	
 	
 	public String xml2Json(String source, ArrayDeque<Map.Entry<String, String>> changes, ArrayList<String> removeElements) {
-
-		JSONObject obj;
-
+		
 		for(Map.Entry<String, String> tagName : changes) {
 			if(removeElements!=null && !removeElements.isEmpty()) {
 				for (String removeTag : removeElements) {
@@ -131,19 +129,18 @@ public class ConversionController {
 			
 			}
 		}
-		obj = XML.toJSONObject(source);
 		
-		return obj.toString();
+		return XML.toJSONObject(source).toString();
 	
 	}
 	
 	public String json2xml(String source, ArrayDeque<Map.Entry<String, String>> changes, ArrayList<String> removeElements, 
-			HttpSession session, ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition) {
+			ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition) {
 		
 		JSONObject obj = new JSONObject(source);
 		String xml_output = XML.toString(obj);
 		
-		xml_output = tagPositionChange(session, xml_output, tagPosition);
+		xml_output = tagPositionChange( xml_output, tagPosition);
 		
 		if(removeElements != null && !removeElements.isEmpty()) {
 			for (String removeTag : removeElements) {
@@ -167,35 +164,29 @@ public class ConversionController {
 	}
 	
 	
-	public String tagPositionChange(HttpSession session, String source, 
-			ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition) {
+	public String tagPositionChange(String source, ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition) {
 		
 		for (Map.Entry<String, ArrayDeque<String>> entry : tagPosition) {
-			if(session.getAttribute("tag position " + entry.getKey()) != null) {
+			
+			Matcher m = Pattern.compile("\\<"+ entry.getKey() + ">" +"(.*?)\\</" + entry.getKey() + ">")
+					.matcher(source);
+			
+			while(m.find()) {
+				String tmp = "";
 				
 				
-				String tmpTagPosition = session.getAttribute("tag position " + entry.getKey()).toString();
-				
-				Matcher m = Pattern.compile("\\<"+ entry.getKey() + ">" +"(.*?)\\</" + entry.getKey() + ">")
-						.matcher(source);
-				
-				while(m.find()) {
-					String tmp = "";
+				for(String tag : entry.getValue()) {
 					
-					
-					for(String tag : tmpTagPosition.replace("[", "").replace("]", "").split(",")) {
-						
-						Matcher tmpMatcher = Pattern.compile("\\<"+ tag + ">" +"(.*?)\\</" + tag + ">")
-								.matcher(m.group(1));
-						while(tmpMatcher.find()) {
-							tmp = tmp.concat("<" + tag + ">" + tmpMatcher.group(1) + "</" + tag + ">");
-						}
+					Matcher tmpMatcher = Pattern.compile("\\<"+ tag + ">" +"(.*?)\\</" + tag + ">")
+							.matcher(m.group(1));
+					while(tmpMatcher.find()) {
+						tmp = tmp.concat("<" + tag + ">" + tmpMatcher.group(1) + "</" + tag + ">");
 					}
-					source = source.replace(m.group(1), tmp);
 				}
+				source = source.replace(m.group(1), tmp);
 			}
+			
 		}
-		
 		return source;
 		
 	}

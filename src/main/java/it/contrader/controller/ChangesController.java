@@ -136,12 +136,13 @@ public class ChangesController {
 			}else {
 				tagName.setValue(request.getParameter(tagName.getKey()));
 			}
-			
 		}
 		
 		@SuppressWarnings("unchecked")
 		ArrayDeque<Map.Entry<String, ArrayDeque<String>>> tagPosition = 
 				(ArrayDeque<Map.Entry<String, ArrayDeque<String>>>) session.getAttribute("tagPosition");
+		
+		ArrayDeque<Map.Entry<String, ArrayDeque<String>>> newTagPosition = new ArrayDeque<Map.Entry<String,ArrayDeque<String>>>();
 		
 		
 		for (Map.Entry<String, ArrayDeque<String>> entry : tagPosition) {
@@ -150,9 +151,20 @@ public class ChangesController {
 				
 				String tmpTagPosition = request.getParameter("tag position " + entry.getKey());
 				
+				ArrayDeque<String> tmpArray = new ArrayDeque<String>();
+				
+				for(String tag : tmpTagPosition.replace("[", "").replace("]", "").split(",")) {
+					tmpArray.addLast(tag);
+				}
+				
+				newTagPosition.add(new AbstractMap.SimpleEntry<String, ArrayDeque<String>>(entry.getKey(), tmpArray));
+				
 				session.setAttribute("tag position " + entry.getKey(), tmpTagPosition);
 			}
+			
 		}
+		
+		session.setAttribute("tagPosition", newTagPosition);
 		
 		//salvo nella sessione il nuovo array deque contenente i nuovi nomi dei tag 
 		session.setAttribute("changes", newdeque);
