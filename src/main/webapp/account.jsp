@@ -22,7 +22,7 @@
 	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
 	   <a href="/conversion/findAll">All Conversion</a>
   	   <% } else { %>
-	   <a class="active" href="/account.jsp">My Conversion</a>
+	   <a class ="active" href="/account.jsp">My Account</a>
 	   <a href="/conversionmanager.jsp">New Conversion</a>
 	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
 	<% } %>

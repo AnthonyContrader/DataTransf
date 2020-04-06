@@ -45,7 +45,7 @@
       <label for="user">Username</label>
     </div>
     <div class="col-75">
-      <input type="text" id="user" name="username" value=<%=uDto.getUsername()%>>
+      <input type="text" id="user" name="username" value="<%=uDto.getUsername()%>">
     </div>
   </div>
   <div class="row">
@@ -54,7 +54,7 @@
     </div>
     <div class="col-75">
       <input
-			type="text" id="pass" name="password" value=<%=uDto.getPassword()%>> 
+			type="text" id="pass" name="password" value="<%=uDto.getPassword()%>"> 
     </div>
   </div>
   <div class="row">
@@ -69,7 +69,7 @@
   				<% } %>
 			</select>
     	</div>
-    	<input type="hidden" name="id" value =<%=u.getId() %>>
+    	<input type="hidden" name="id" value="<%=uDto.getId() %>">
   </div>
 
       <button type="submit" >Edit</button>

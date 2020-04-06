@@ -68,7 +68,7 @@ public class UserController {
 		dto.setPassword(password);
 		dto.setUsertype(usertype);
 		service.update(dto);
-		request.getSession().setAttribute("user", dto);
+		//request.getSession().setAttribute("user", dto);
 		setAll(request);
 		return "users";
 
