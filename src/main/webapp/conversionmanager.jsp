@@ -13,20 +13,20 @@
 
 <div class="navbar">
 	  <a href="/homeadmin.jsp">Home</a>
-	  <a href="/user/getall">Users</a>
-	  <a class="active" href="/conversionmanager.jsp">Conversions</a>
-	   	<%
+	   <%
   		UserDTO u = (UserDTO) session.getAttribute("user");
-  		%>
-			<a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
-		<%
-  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		%>
-  			<a href="/conversion/findAll">All Conversion</a>
-		<%
-			} 
-		%>
-	  <a href="/user/logout" id="logout">Logout</a>
+	   if(u.getUsertype().equals(Usertype.ADMIN)) { %>
+	   
+	   <a href="/user/getall">Users</a>
+	   <a class = "active" href="/conversionmanager.jsp">New Conversion</a>
+	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	   <a href="/conversion/findAll">All Conversion</a>
+  	   <% } else { %>
+	   <a href="/account.jsp">My Account</a>
+	   <a class= "active" href="/conversionmanager.jsp">New Conversion</a>
+	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	<% } %>
+	   <a href="/user/logout" id="logout">Logout</a>
 </div>
 
 <h1>Welcome in Conversion ${user.getUsername()}</h1>

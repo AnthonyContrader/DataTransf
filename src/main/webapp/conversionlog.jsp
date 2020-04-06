@@ -14,25 +14,23 @@
 
 <% String active = session.getAttribute("active").toString(); System.out.println(active); %>
 
-<h1>Welcome ${user.getUsername()}</h1>
-
-	<div class="navbar">
-	  <a  href="/homeadmin.jsp">Home</a>
-	  <a href="/user/getall">Users</a>
-	  <a href="/conversionmanager.jsp">Conversions</a>
-	   	<%
+<div class="navbar">
+	  <a href="/homeadmin.jsp">Home</a>
+	   <%
   		UserDTO u = (UserDTO) session.getAttribute("user");
-  		%>
-		<a <% if(active.equals("myConversion")) { %> class="active" <% } %> href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
-		<%
-  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		%>
-  		<a <% if(active.equals("findAll")) { %> class="active" <% } %> href="/conversion/findAll">All Conversion</a>
-		<%
-			} 
-		%>
-	  <a href="/user/logout" id="logout">Logout</a>
-	</div>
+	   if(u.getUsertype().equals(Usertype.ADMIN)) { %>
+	   
+	   <a href="/user/getall">Users</a>
+	   <a href="/conversionmanager.jsp">New Conversion</a>
+	   <a class = "active" href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	   <a href="/conversion/findAll">All Conversion</a>
+  	   <% } else { %>
+	   <a href="/account.jsp">My Account</a>
+	   <a href="/conversionmanager.jsp">New Conversion</a>
+	   <a class = "active" href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	<% } %>
+	   <a href="/user/logout" id="logout">Logout</a>
+</div>
 
 	<%
 		List<ConversionDTO> list = (List<ConversionDTO>) request.getSession().getAttribute("Log");

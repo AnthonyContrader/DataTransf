@@ -23,23 +23,24 @@
 	<%@include file="css/header.jsp"%>
 
 
-	<div class="navbar">
-	  <a class="active" href="/homeadmin.jsp">Home</a>
-	  <a href="/user/getall">Users</a>
-	  <a href="/conversionmanager.jsp">Conversions</a>
-	   	<%
+<div class="navbar">
+	  <a href="/homeadmin.jsp">Home</a>
+	   <%
   		UserDTO u = (UserDTO) session.getAttribute("user");
-  		%>
-			<a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
-		<%
-  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		%>
-  			<a href="/conversion/findAll">All Conversion</a>
-		<%
-			} 
-		%>
-	  <a href="/user/logout" id="logout">Logout</a>
-	</div>
+	   if(u.getUsertype().equals(Usertype.ADMIN)) { %>
+	   
+	   <a href="/user/getall">Users</a>
+	   <a href="/conversionmanager.jsp">New Conversion</a>
+	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	   <a href="/conversion/findAll">All Conversion</a>
+  	   <% } else { %>
+	   <a href="/account.jsp">My Account</a>
+	   <a href="/conversionmanager.jsp">New Conversion</a>
+	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	<% } %>
+	   <a href="/user/logout" id="logout">Logout</a>
+</div>
+
 
 	<div class="main">
 		<h1>Welcome ${user.getUsername()}</h1>

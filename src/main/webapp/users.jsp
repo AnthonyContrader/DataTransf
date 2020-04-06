@@ -16,20 +16,20 @@
 
 <div class="navbar">
 	  <a href="/homeadmin.jsp">Home</a>
-	  <a class="active" href="/user/getall">Users</a>
-	  <a href="/conversionmanager.jsp">Conversions</a>
-	   	<%
+	   <%
   		UserDTO u = (UserDTO) session.getAttribute("user");
-  		%>
-			<a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversion</a>
-		<%
-  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		%>
-  			<a href="/conversion/findAll">All Conversion</a>
-		<%
-			} 
-		%>
-	  <a href="/user/logout" id="logout">Logout</a>
+	   if(u.getUsertype().equals(Usertype.ADMIN)) { %>
+	   
+	   <a class = "active" href="/user/getall">Users</a>
+	   <a href="/conversionmanager.jsp">New Conversion</a>
+	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	   <a href="/conversion/findAll">All Conversion</a>
+  	   <% } else { %>
+	   <a href="/account.jsp">My Account</a>
+	   <a href="/conversionmanager.jsp">New Conversion</a>
+	   <a href="/conversion/findAllByIdUser?idUser=${user.getId()}">My Conversions</a>
+	<% } %>
+	   <a href="/user/logout" id="logout">Logout</a>
 </div>
 
 
@@ -49,11 +49,8 @@
 				<th></th>
 				<th></th>
 			</tr>
-					<%
-  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		%>
  		
- 		<%
+ 		<% 
 				for (UserDTO dto : list) {
 			%>
 			<tr>
@@ -68,31 +65,7 @@
 			<%
 				}
 			%>
- 		
-		<%
-			} else {
-			
-		%>
-			<tr>
-				<td><a href="/user/read?id=<%=u.getId()%>"> <%=u.getUsername()%>
-				</a></td>
-				<td><%=u.getPassword()%></td>
-				<td><%=u.getUsertype()%></td>
-		   	    <td><a href="/user/preupdate?id=<%=u.getId()%>">Edit</a></td>
-				<td><a href="/user/delete?id=<%=u.getId()%>">Delete</a></td>
-
-			</tr>
-			<%
-				}
-			%>
-			
-
 		</table>
-		
-	 
-	    <%
-  		if(u.getUsertype().equals(Usertype.ADMIN)) { 
- 		%>
 
 		<form id="floatright" action="/user/insert" method="post">
 			<div class="row">
@@ -127,10 +100,6 @@
 			</div>
 			<button type="submit">Insert</button>
 		</form>
-
-			<%
-				}
-			%>
 
 	</div>
 	<br>
