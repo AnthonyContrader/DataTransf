@@ -36,7 +36,6 @@
 	<div class="main">
 		<%
 			List<UserDTO> list = (List<UserDTO>) session.getAttribute("list");
-		System.out.println(list);
 		%>
 
 		<br>

@@ -12,7 +12,7 @@
 </head>
 <body><%@ include file="../css/header.jsp" %>
 
-<% String active = session.getAttribute("active").toString(); System.out.println(active); %>
+<% String active = session.getAttribute("active").toString(); %>
 
 <div class="navbar">
 	  <a href="/homeadmin.jsp">Home</a>
