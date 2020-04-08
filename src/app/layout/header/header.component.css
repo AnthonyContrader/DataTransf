@@ -54,3 +54,8 @@
     background-color: crimson;
 
   }
+
+  .col-md-4 img {
+    max-width: 30%;
+    max-height: 30%;
+  }
