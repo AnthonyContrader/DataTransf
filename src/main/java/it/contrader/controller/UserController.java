@@ -32,10 +32,10 @@ public class UserController extends AbstractController<UserDTO>{
 	@Autowired
 	private UserService userService;
 
-
 	//POST Angular a UserDTO
 	@PostMapping(value = "/login")
 	public UserDTO login( @RequestBody LoginDTO loginDTO ) {
 		return userService.findByUsernameAndPassword(loginDTO.getUsername(), loginDTO.getPassword());
 	}
+	
 }

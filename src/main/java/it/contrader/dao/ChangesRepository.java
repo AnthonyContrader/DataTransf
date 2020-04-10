@@ -17,4 +17,6 @@ public interface ChangesRepository extends CrudRepository<Changes, Long> {
 	@Query(value = "SELECT changes.id FROM(SELECT id FROM changes WHERE user=:userId ORDER BY id DESC LIMIT 1)changes ORDER BY changes.id", nativeQuery = true)
 	Long getLastId(@Param("userId") Long userId);
 	
+	Iterable<Changes> findAllByUser(Long user);
+	
 }

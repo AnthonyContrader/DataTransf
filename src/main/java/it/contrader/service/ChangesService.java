@@ -16,4 +16,9 @@ public class ChangesService extends AbstractService<Changes, ChangesDTO> {
 	public Long getLastId(Long userId) {
 		return repository.getLastId(userId);
 	}
+	
+	public Iterable<ChangesDTO> getAllByUser(Long user){
+		return converter.toDTOList(repository.findAllByUser(user));
+	}
+	
 }

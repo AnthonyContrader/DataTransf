@@ -12,5 +12,6 @@ public class ConvService extends AbstractService<Conversion, ConversionDTO> {
 	
 	public List<ConversionDTO> findAllByIdUser(Long idUser) {
 		return converter.toDTOList(((ConversionRepository) repository).findAllByIdUser(idUser));
-}}
+	}
 	
+}
