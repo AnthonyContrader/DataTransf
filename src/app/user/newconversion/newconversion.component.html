@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    
+    <div class="col">
+      <h3 style="text-align: center;">Conversion</h3>
+      <div class="row">
+        <label for="source">Source</label>
+        <textarea (keyup)="seveToLocalstorage()" [(ngModel)]="conversion.source" name="source" rows="5" ></textarea>
+      </div>
+      <div class="row">
+        <label >Source Type</label>
+        <div>
+          <label for="sourceType">XML</label>
+          <input type="radio" name="sourceType" id="" (change)="seveToLocalstorage()" value="XML" [(ngModel)]="conversion.sourceType"> 
+          <label for="sourceType">JSON</label>
+          <input type="radio" name="sourceType" id="" (change)="seveToLocalstorage()" value="JSON" [(ngModel)]="conversion.sourceType">
+        </div>
+      </div>
+      <div class="row">
+        <label >Output Type</label>
+        <div>
+          <label for="outputType">XML</label>
+          <input type="radio" name="outputType" id=""  value="XML" [(ngModel)]="conversion.outputType"> 
+          <label for="outputType">JSON</label>
+          <input type="radio" name="outputType" id=""  value="JSON" [(ngModel)]="conversion.outputType">
+        </div>
+      </div>
+      
+      <button (click)="consoleLog()">Console Log</button>
+
+      <button (click)="getOutputString()">Get Conversion</button>
+    </div>
+    <div class="col" >
+      <app-newchanges [conversion]="conversion"></app-newchanges>
+    </div>
+    <div *ngIf="getOutput">
+      {{outPut}}
+    </div>
+  </div>
+</div>

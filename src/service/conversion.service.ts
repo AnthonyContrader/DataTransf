@@ -15,7 +15,7 @@ export class ConversionService extends AbstractService<ConversionDTO>{
     }
 
     findAllByIdUser(id: number): Observable<ConversionDTO[]> {
-        return this.http.post<any>('http://localhost:8080/' + this.type + '/getAllByIdUser', id)
+        return this.http.get<any>(`http://localhost:8080/${this.type}/getAllByIdUser?id=${id}`)
     }
 
 }

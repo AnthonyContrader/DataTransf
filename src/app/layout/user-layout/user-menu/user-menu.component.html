@@ -24,6 +24,16 @@
             <a [routerLink]="['/user-dashboard/conversionlog']"> <i class="fas fa-th-list" style="margin-right: 10px"> </i>
                 My Conversion </a>
           </button>
+          <button class="menubtn">
+            <a [routerLink]="['/user-dashboard/changeslog']"> <i class="fas fa-language" style="margin-right: 10px;"> </i>
+                My Changes </a>
+          </button>
+          <button class="menubtn">
+            <a [routerLink]="['/user-dashboard/newconversion']">
+                <i class="fas fa-plus" style="margin-right: 10px;"></i>
+                New Conversion
+            </a>
+          </button>
           <button class="menubtn" (click)="logout()">
               <i class="fas fa-sign-out-alt" style="margin-right: 15px"></i>Logout
           </button>

@@ -1,0 +1,20 @@
+<div class="container">
+  <h3 style="text-align: center;">Changes</h3>
+
+  <div>
+    <h4>Preset Name</h4>
+    <input type="text" [(ngModel)]="changes.name">
+  </div>
+
+  <div>
+    <div *ngFor="let tag of originalTag">
+      <label>{{tag}}</label>
+      <input type="text" [(ngModel)]="newTag[originalTag.indexOf(tag)]">
+      <a *ngIf="!removedTag.includes(tag)"><i class="fas fa-trash" (click)="removeTag(tag)"></i></a>
+      <a *ngIf="removedTag.includes(tag)"><i class="fas fa-undo-alt" (click)="replaceTag(tag)"></i></a>
+    </div>
+  </div>
+
+  <button (click)="consoleLog()">Console.log</button>
+  <button (click)="saveChanges()">Save Changes</button>
+</div>
