@@ -9,12 +9,12 @@
   <div>
     <div *ngFor="let tag of originalTag">
       <label>{{tag}}</label>
-      <input type="text" [(ngModel)]="newTag[originalTag.indexOf(tag)]">
+      <input type="text" (keyup)="saveChanges()" [(ngModel)]="newTag[originalTag.indexOf(tag)]">
       <a *ngIf="!removedTag.includes(tag)"><i class="fas fa-trash" (click)="removeTag(tag)"></i></a>
       <a *ngIf="removedTag.includes(tag)"><i class="fas fa-undo-alt" (click)="replaceTag(tag)"></i></a>
     </div>
   </div>
 
   <button (click)="consoleLog()">Console.log</button>
-  <button (click)="saveChanges()">Save Changes</button>
+  <!-- <button (click)="saveChanges()">Save Changes</button> -->
 </div>

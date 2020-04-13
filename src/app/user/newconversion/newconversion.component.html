@@ -20,21 +20,22 @@
         <label >Output Type</label>
         <div>
           <label for="outputType">XML</label>
-          <input type="radio" name="outputType" id=""  value="XML" [(ngModel)]="conversion.outputType"> 
+          <input type="radio" name="outputType" id="" (change)="getOutputString()" value="0" [(ngModel)]="conversion.outputType"> 
           <label for="outputType">JSON</label>
-          <input type="radio" name="outputType" id=""  value="JSON" [(ngModel)]="conversion.outputType">
+          <input type="radio" name="outputType" id="" (change)="getOutputString()" value="1" [(ngModel)]="conversion.outputType">
         </div>
       </div>
       
       <button (click)="consoleLog()">Console Log</button>
 
-      <button (click)="getOutputString()">Get Conversion</button>
+      <!-- <button (click)="getOutputString()">Get Conversion</button> -->
     </div>
     <div class="col" >
       <app-newchanges [conversion]="conversion"></app-newchanges>
     </div>
-    <div *ngIf="getOutput">
-      {{outPut}}
+    <div class="container" *ngIf="getOutput">
+      <p>{{outPut}}</p>
+      <button (click)="saveConversion()" >Save Conversion</button>
     </div>
   </div>
 </div>

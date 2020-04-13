@@ -4,6 +4,7 @@ import { UserDTO } from 'src/dto/userdto';
 import { ChangesDTO } from 'src/dto/changesdto';
 import { Sourcetype } from 'src/dto/sourcetype';
 import { Observable, fromEvent } from 'rxjs';
+import { ConversionService } from 'src/service/conversion.service';
 
 @Component({
   selector: 'app-newconversion',
@@ -20,7 +21,7 @@ export class NewconversionComponent implements OnInit {
   search: string;   // text to search (email)
 
 
-  constructor() { }
+  constructor(private service: ConversionService) { }
 
   submit(text) {
     console.log('submit', text);
@@ -30,6 +31,7 @@ export class NewconversionComponent implements OnInit {
   ngOnInit() {
     
     localStorage.removeItem('new_changes');
+    window.addEventListener('new_changes_saved', () => this.getOutputString())
     this.conversion.idUser = (JSON.parse(localStorage.getItem('currentUser')) as UserDTO).id
   }
 
@@ -38,9 +40,14 @@ export class NewconversionComponent implements OnInit {
   }
 
   seveToLocalstorage() {
-    
     localStorage.setItem('new_conversion', JSON.stringify(this.conversion))
     window.dispatchEvent(new CustomEvent('new_conversion_source'))
+  }
+
+  saveConversion(){
+    window.dispatchEvent(new CustomEvent('conversion_require_last_id_changes'))
+    this.conversion.changes = parseInt(localStorage.getItem('last_changes_id').valueOf())
+    this.service.insert(this.conversion).subscribe(()=> this.conversion)
   }
 
   getOutputString() {
@@ -63,8 +70,21 @@ export class NewconversionComponent implements OnInit {
     const changes = JSON.parse(localStorage.getItem('new_changes')) as ChangesDTO
 
     let outputSource = this.conversion.source
+    let domElement = new DOMParser().parseFromString(this.conversion.source, 'text/xml')
 
-    if (changes.changes) {
+    console.log(domElement)
+
+    if (changes && changes.removed){
+      changes.removed.replace('[', '').replace(']', '').split(',').forEach(el=>{
+
+        domElement.querySelectorAll(el).forEach(remove=>{
+          remove.remove()
+        })
+
+      })
+    }
+
+    if (changes && changes.changes) {
       changes.changes.replace('[', '').replace(']', '').split(',').forEach(el=>{
         let tmp = el.split('=')
 
@@ -75,7 +95,7 @@ export class NewconversionComponent implements OnInit {
       })
     }
 
-    this.outPut = JSON.stringify(this.xmlToJson(new DOMParser().parseFromString(outputSource, 'text/xml')))
+    this.outPut = JSON.stringify(this.xmlToJson(domElement))
 
   }
 
@@ -85,7 +105,7 @@ export class NewconversionComponent implements OnInit {
 
     let outputSource = this.conversion.source
 
-    if (changes.changes) {
+    if (changes && changes.changes) {
       changes.changes.replace('[', '').replace(']', '').split(',').forEach(el=>{
         let tmp = el.split('=')
 

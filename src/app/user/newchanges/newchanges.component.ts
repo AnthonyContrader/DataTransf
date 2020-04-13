@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChangesDTO } from 'src/dto/changesdto';
 import { ConversionDTO } from 'src/dto/conversiondto';
+import { ChangesService } from 'src/service/changes.service';
+import { UserDTO } from 'src/dto/userdto';
 
 @Component({
   selector: 'app-newchanges',
@@ -21,20 +23,27 @@ export class NewchangesComponent implements OnInit {
 
   removedTag: Array<string> = new Array()
 
-  constructor() { }
+  constructor(private service: ChangesService) { }
 
   ngOnInit() {
-    //this.conversion = JSON.parse(localStorage.getItem('new_conversion'))
-
     window.addEventListener('new_conversion_source', ()=> this.start())
+
+    window.addEventListener('conversion_require_last_id_changes', ()=> this.inserChanges())
     
-    this.changes.user = this.conversion.idUser
-    //this.getOriginalTag()
- 
+    this.changes.user = this.conversion.idUser 
   }
 
   start(){
     this.getOriginalTag()
+  }
+
+  inserChanges(){
+    this.saveChanges()
+    this.service.insert(this.changes).subscribe(()=>this.getLastId())
+  }
+
+  getLastId(){
+    this.service.getLastId((JSON.parse(localStorage.getItem('currentUser')) as UserDTO).id).subscribe(id=>localStorage.setItem('last_changes_id', id.toString()))
   }
 
   getTagList() {
@@ -62,15 +71,19 @@ export class NewchangesComponent implements OnInit {
       var dom = new DOMParser().parseFromString(this.conversion.source, 'text/xml')
 
       let tagList: Array<string> = new Array()
-
-      Array.from(dom.all).forEach(el=>{
-        if(!tagList.includes(el.tagName)){
-          tagList.push(el.tagName)
-          this.newTag.push(el.tagName)
-        }
-      })
+      let newTagList: Array<string> = new Array()
+      if(!dom.querySelector('parsererror')){
+        Array.from(dom.all).forEach(el=>{
+          if(!tagList.includes(el.tagName)){
+            tagList.push(el.tagName)
+            newTagList.push(el.tagName)
+          }
+        })
+      }
+      
 
       this.originalTag = tagList
+      this.newTag = newTagList
 
     }
   }
@@ -87,13 +100,21 @@ export class NewchangesComponent implements OnInit {
 
     this.changes.changes = changeString
 
-    this.changes.removed = `[${this.removedTag.toString()}]`
+    if(this.removedTag.length > 0){
+      this.changes.removed = `[${this.removedTag.toString()}]`
+    }else {
+      this.changes.removed = null
+    }
+    
 
     localStorage.setItem('new_changes', JSON.stringify(this.changes))
+
+    window.dispatchEvent(new CustomEvent('new_changes_saved'))
 
   }
 
   consoleLog(){
+    console.log(this.newTag)
     console.log(this.conversion.source)
   }
 
