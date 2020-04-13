@@ -101,7 +101,7 @@ export class NewconversionComponent implements OnInit {
 
   json2xml(){
 
-       const changes = JSON.parse(localStorage.getItem('new_changes')) as ChangesDTO
+    const changes = JSON.parse(localStorage.getItem('new_changes')) as ChangesDTO
 
     let outputSource = this.conversion.source
 

@@ -67,24 +67,47 @@ export class NewchangesComponent implements OnInit {
 
   getOriginalTag(){
     if(this.conversion.source){
-      
-      var dom = new DOMParser().parseFromString(this.conversion.source, 'text/xml')
+        let tagList: Array<string> = new Array()
+        let newTagList: Array<string> = new Array()
+        switch(this.conversion.sourceType.toString()){
+          case 'XML':
+              var dom = new DOMParser().parseFromString(this.conversion.source, 'text/xml')
 
-      let tagList: Array<string> = new Array()
-      let newTagList: Array<string> = new Array()
-      if(!dom.querySelector('parsererror')){
-        Array.from(dom.all).forEach(el=>{
-          if(!tagList.includes(el.tagName)){
-            tagList.push(el.tagName)
-            newTagList.push(el.tagName)
-          }
-        })
+              
+              if(!dom.querySelector('parsererror')){
+                Array.from(dom.all).forEach(el=>{
+                  if(!tagList.includes(el.tagName)){
+                    tagList.push(el.tagName)
+                    newTagList.push(el.tagName)
+                  }
+                })
+              }
+              
+
+              this.originalTag = tagList
+              this.newTag = newTagList
+            break;
+          case 'JSON':
+              let json = JSON.parse(this.conversion.source)
+
+              this.getJsonKey(json, tagList, newTagList)
+
+              this.originalTag = tagList
+              this.newTag = newTagList
+            break;
+        }
+    }
+  }
+
+  getJsonKey(obj: object, keyList: Array<string>, tagList: Array<string>){
+    for (const key in obj) {
+      if(typeof obj[key] == 'object'){
+        this.getJsonKey(obj[key], keyList, tagList)
       }
-      
-
-      this.originalTag = tagList
-      this.newTag = newTagList
-
+      if(!keyList.includes(key) && isNaN(parseFloat(key))){
+        keyList.push(key)
+        tagList.push(key)
+      }
     }
   }
 
