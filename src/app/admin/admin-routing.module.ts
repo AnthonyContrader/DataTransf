@@ -5,6 +5,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UsersComponent } from './users/users.component';
 import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
 import { AccountComponent } from './account/account.component';
+import { NewconversionComponent } from '../user/newconversion/newconversion.component';
+import { ConversionlogComponent } from '../user/conversionlog/conversionlog.component';
+import { ChangeslogComponent } from '../user/changeslog/changeslog.component';
+import { GeneralinfoComponent } from './generalinfo/generalinfo.component';
 
 /**
  * Modulo di routing dell'admin. Qui ci sono i percorsi che un admin può seguire:
@@ -23,7 +27,11 @@ const routes: Routes = [
     { path: '', component: AdminDashboardComponent },
     { path: 'users', component: UsersComponent },
     { path: 'work-in-progress', component: WorkInProgressComponent },
-    { path: 'account', component: AccountComponent }
+    { path: 'account', component: AccountComponent },
+    { path: 'newconversion', component: NewconversionComponent },
+    { path: 'conversionlog', component: ConversionlogComponent },
+    { path: 'changeslog', component: ChangeslogComponent },
+    { path: 'generalinfo', component: GeneralinfoComponent }
   ]}
 ];
 

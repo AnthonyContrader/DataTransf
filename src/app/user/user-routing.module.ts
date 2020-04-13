@@ -8,6 +8,7 @@ import { ConversionlogComponent } from './conversionlog/conversionlog.component'
 import { ChangeslogComponent } from './changeslog/changeslog.component';
 import { NewconversionComponent } from './newconversion/newconversion.component';
 import { NewchangesComponent } from './newchanges/newchanges.component';
+import { GeneralinfoComponent } from '../admin/generalinfo/generalinfo.component';
 
 const routes: Routes = [
   { path: 'user-dashboard', component: UserLayoutComponent, children:[
@@ -17,7 +18,8 @@ const routes: Routes = [
     { path: 'work-in-progress', component: WorkInProgressComponent },
     { path: 'changeslog', component: ChangeslogComponent },
     { path: 'newconversion', component: NewconversionComponent },
-    { path: 'newchanges', component: NewchangesComponent }
+    { path: 'newchanges', component: NewchangesComponent },
+    { path: 'generalinfo', component: GeneralinfoComponent }
 ]}
 ];
 

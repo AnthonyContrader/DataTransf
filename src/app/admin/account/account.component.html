@@ -4,8 +4,15 @@
   <div>
     <h3>Change Name</h3>
     <div>
-      
+      <input type="text" [(ngModel)]="user.username">
     </div>
+
+    <h3>Change Password</h3>
+    <div>
+      <input type="text" [(ngModel)]="user.password">
+    </div>
+
+    <button (click)="update()">Save Changes</button>
   </div>
 
 </div>

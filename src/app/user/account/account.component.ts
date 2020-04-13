@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDTO } from 'src/dto/userdto';
+import { UserService } from 'src/service/user.service';
 
 @Component({
   selector: 'app-account',
@@ -9,13 +10,19 @@ import { UserDTO } from 'src/dto/userdto';
 export class AccountComponent implements OnInit {
 
   user: UserDTO
+  usertoinsert: UserDTO = new UserDTO()
 
-  constructor() { }
+  constructor(private service: UserService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser'))
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  
+  update(user: UserDTO): void {
+    this.service.update(user).subscribe(()=>{
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.user = user
+    })
+  }
 
 }
