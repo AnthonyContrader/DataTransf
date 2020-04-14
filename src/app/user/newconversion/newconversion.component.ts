@@ -86,7 +86,7 @@ export class NewconversionComponent implements OnInit {
         let tmp = el.split('=')
 
         if(tmp){
-         domElement.firstElementChild.innerHTML = domElement.firstElementChild.innerHTML.replace(new RegExp(`<${tmp[0]}>`, 'g'), `<${tmp[1]}>`).replace(new RegExp(`</${tmp[0]}>`, 'g'), `</${tmp[1]}>`)
+         domElement.firstElementChild.outerHTML = domElement.firstElementChild.outerHTML.replace(new RegExp(`<${tmp[0]}>`, 'g'), `<${tmp[1]}>`).replace(new RegExp(`</${tmp[0]}>`, 'g'), `</${tmp[1]}>`)
         }
 
       })
