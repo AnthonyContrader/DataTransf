@@ -66,7 +66,8 @@ export class NewchangesComponent implements OnInit {
   }
 
   getOriginalTag(){
-    if(this.conversion.source){
+
+    if(this.conversion.source && this.conversion.sourceType){
         let tagList: Array<string> = new Array()
         let newTagList: Array<string> = new Array()
         switch(this.conversion.sourceType.toString()){
