@@ -69,7 +69,7 @@ export class NewconversionComponent implements OnInit {
   xml2json() {
     const changes = JSON.parse(localStorage.getItem('new_changes')) as ChangesDTO
 
-    let domElement = new DOMParser().parseFromString(this.conversion.source, 'text/xml')
+    let domElement = new DOMParser().parseFromString(`<root>${this.conversion.source}</root>`, 'text/xml')
 
     if (changes && changes.removed){
       changes.removed.replace('[', '').replace(']', '').split(',').forEach(el=>{
@@ -86,13 +86,13 @@ export class NewconversionComponent implements OnInit {
         let tmp = el.split('=')
 
         if(tmp){
-         domElement.firstElementChild.outerHTML = domElement.firstElementChild.outerHTML.replace(new RegExp(`<${tmp[0]}>`, 'g'), `<${tmp[1]}>`).replace(new RegExp(`</${tmp[0]}>`, 'g'), `</${tmp[1]}>`)
+         domElement.firstElementChild.innerHTML = domElement.firstElementChild.innerHTML.replace(new RegExp(`<${tmp[0]}>`, 'g'), `<${tmp[1]}>`).replace(new RegExp(`</${tmp[0]}>`, 'g'), `</${tmp[1]}>`)
         }
 
       })
     }
 
-    this.outPut = JSON.stringify(this.xmlToJson(domElement))
+    this.outPut = JSON.stringify(this.xmlToJson(domElement.firstElementChild))
 
   }
 
