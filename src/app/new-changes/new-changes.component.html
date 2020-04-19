@@ -1,0 +1,80 @@
+<div class="container">
+  
+  <div class="row header">
+    <div class="col-md-2 offset-md-5 text-center">
+      New Changes
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Preset Name</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="new_changes.name">
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="row" *ngFor="let tag of tagQuantity; let i = index">
+    <div class="col-md-10 offset-md-1">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Tag and New Tag</span>
+        </div>
+        <input type="text" aria-label="First name" class="form-control" [(ngModel)]="original_tag[i]">
+        <input type="text" aria-label="Last name" class="form-control" [(ngModel)]="new_tag[i]">
+        <div class="input-group-append">
+          <a class="input-group-text" (click)="removeTagChange(i)">
+            <svg class="bi bi-trash2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M3.18 4l1.528 9.164a1 1 0 00.986.836h4.612a1 1 0 00.986-.836L12.82 4H3.18zm.541 9.329A2 2 0 005.694 15h4.612a2 2 0 001.973-1.671L14 3H2l1.721 10.329z" clip-rule="evenodd"/>
+              <path d="M14 3c0 1.105-2.686 2-6 2s-6-.895-6-2 2.686-2 6-2 6 .895 6 2z"/>
+              <path fill-rule="evenodd" d="M12.9 3c-.18-.14-.497-.307-.974-.466C10.967 2.214 9.58 2 8 2s-2.968.215-3.926.534c-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466zM8 5c3.314 0 6-.895 6-2s-2.686-2-6-2-6 .895-6 2 2.686 2 6 2z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2 offset-md-5">
+    <button class="btn btn-outline-secondary" type="button" (click)="addTag()">Add Tag</button>
+  </div>
+
+  <div class="row" *ngFor="let tag of removedTagQuantity; let i = index">
+    <div class="col-md-6 offset-md-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Removed Tag</span>
+        </div>
+        <input type="text" aria-label="First name" class="form-control" [(ngModel)]="removed_tag[i]">
+        <div class="input-group-append">
+          <a class="input-group-text" (click)="restoreTag(i)">
+            <svg class="bi bi-arrow-counterclockwise" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 00-7.103-3.16.5.5 0 11-.454-.892A6 6 0 112.545 5.5a.5.5 0 11.91.417 5 5 0 109.375.789z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M7.854.146a.5.5 0 00-.708 0l-2.5 2.5a.5.5 0 000 .708l2.5 2.5a.5.5 0 10.708-.708L5.707 3 7.854.854a.5.5 0 000-.708z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2 offset-md-5">
+    <button class="btn btn-outline-secondary" type="button" (click)="addRemovedTag()">Add Removed Tag</button>
+  </div>
+
+  <div class="col-md-2 offset-md-5">
+    <button class="btn btn-outline-secondary" type="button" (click)="saveChanges()">
+      Save
+      <svg class="bi bi-archive" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z" clip-rule="evenodd"/>
+        <path fill-rule="evenodd" d="M5.5 7.5A.5.5 0 016 7h4a.5.5 0 010 1H6a.5.5 0 01-.5-.5zM15 2H1v2h14V2zM1 1a1 1 0 00-1 1v2a1 1 0 001 1h14a1 1 0 001-1V2a1 1 0 00-1-1H1z" clip-rule="evenodd"/>
+      </svg>
+    </button>
+  </div>
+  
+
+</div>

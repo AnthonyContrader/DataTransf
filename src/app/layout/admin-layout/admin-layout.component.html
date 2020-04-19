@@ -1,15 +1,46 @@
-<div class="row no-gutters" style="height: 8vh">
-  <div class="col-md-12 no-gutters">
-      <app-header></app-header>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/admin-dashboard']">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/account']">My Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/conversionlog']">My Conversion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/allconversionlog']">All Conversion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/changeslog']">My Changes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin-dashboard/allchangeslog']">All Changes</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          New
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/admin-dashboard/newconversion']">Conversion</a>
+          <a class="dropdown-item" [routerLink]="['/admin-dashboard/newchanges']">Changes</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+   
   </div>
-</div>
-<div class="row no-gutters" style="height: 92vh">
-<div class="col-md-2 no-gutters" style="height: 92vh">
-  <div id="menu" >
-      <app-admin-menu></app-admin-menu>
-  </div>
-</div>
-<div class="col-md-10 no-gutters" style="height: 92vh">
-  <router-outlet></router-outlet>   
-</div>
+</nav>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
 </div>

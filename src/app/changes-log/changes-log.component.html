@@ -1,0 +1,33 @@
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 offset-md-5 text-center">
+        My Changes
+      </div>
+    </div>
+    <div class="row border header text-center">
+      <div class="col-md-2 border-right">
+        Name
+      </div>
+      <div class="col-md-6 border-right">
+        Tag
+      </div>
+      <div class="col-md-4 border-right">
+        Removed Tag
+      </div>
+      
+    </div>
+    <div class="row border text-center" *ngFor="let changes of user_changes" >
+      <div class="col-md-2 border-right">
+        {{changes.name}}
+      </div>
+      <div class="col-md-6 border-right">
+        {{(changes.changes.length > 60) ? (changes.changes | slice:0:60) + '...' : (changes.changes)}}
+      </div>
+      <div class="col-md-4">
+        {{(changes.changes.length > 40) ? (changes.changes | slice:0:40) + '...' : (changes.changes)}}
+      </div>
+    </div>
+  </div>
+</div>

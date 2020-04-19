@@ -1,27 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { UsersComponent } from './users/users.component';
-import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
-import { AccountComponent } from './account/account.component';
-import { GeneralinfoComponent } from './generalinfo/generalinfo.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AllConversionLogComponent } from './all-conversion-log/all-conversion-log.component';
+import { AllChangesLogComponent } from './all-changes-log/all-changes-log.component';
 
-/**
- * Modulo dell'admin, qui vengono dichiarate le component che utilizza 
- * l'admin. Questo modulo importa AdminRoutingModule.
- * 
- * @author Vittorio Valent
- * 
- * @see AdminRoutingModule
- */
+
+
 @NgModule({
-  declarations: [AdminDashboardComponent, UsersComponent, WorkInProgressComponent, AccountComponent, GeneralinfoComponent],
+  declarations: [AdminHomeComponent, AllConversionLogComponent, AllChangesLogComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule,
-    FormsModule
+    AdminRoutingModule
   ]
 })
 export class AdminModule { }

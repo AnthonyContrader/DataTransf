@@ -1,0 +1,44 @@
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 offset-md-5 text-center">
+        My Conversion
+      </div>
+    </div>
+    <div class="row border header text-center">
+      <div class="col-md-1 border-right">
+        Id
+      </div>
+      <div class="col-md-1 border-right">
+        Type In
+      </div>
+      <div class="col-md-8 border-right">
+        Source
+      </div>
+      <div class="col-md-1 border-right">
+        Type Out
+      </div>
+      <div class="col-md-1">
+        Changes
+      </div>
+    </div>
+    <div class="row border text-center" *ngFor="let conversion of conversions" >
+      <div class="col-md-1 border-right"> 
+        {{conversion.idConversion}}
+      </div>
+      <div class="col-md-1 border-right">
+        {{conversion.sourceType}}
+      </div>
+      <div class="col-md-8 border-right">
+        {{(conversion.source.length > 80) ? (conversion.source | slice:0:80) + '...' : (conversion.source)}}
+      </div>
+      <div class="col-md-1 border-right">
+        {{conversion.outputType}}
+      </div>
+      <div class="col-md-1">
+        {{conversion.changes}}
+      </div>
+    </div>
+  </div>
+</div>

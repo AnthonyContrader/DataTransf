@@ -1,0 +1,38 @@
+* {
+    color: #c2c7ca;
+    background-color: transparent;
+}
+
+.row.header {
+    padding-bottom: 20px;
+}
+
+.input-group-text, button, a.input-group-text {
+    color: #d14671;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: #d14671;
+}
+
+button:hover, a.input-group-text:hover {
+    background-color: #d14671;
+    color: #243441;
+}
+
+a.input-group-text:hover svg, button:hover svg {
+    fill: #243441;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    border-color: #d14671;
+    box-shadow: 0 0 0 .2rem rgba(209, 70, 113, .25);
+}
+
+.row {
+    margin-top: 6px;
+}

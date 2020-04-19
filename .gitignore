@@ -6,7 +6,6 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-/target
 
 # dependencies
 /node_modules
@@ -21,7 +20,7 @@ speed-measure-plugin.json
 .classpath
 .c9/
 *.launch
-/.settings
+.settings/
 *.sublime-workspace
 
 # IDE - VSCode

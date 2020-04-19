@@ -1,0 +1,27 @@
+* {
+    color: #c2c7ca;
+    background-color: transparent;
+}
+
+.row.header {
+    padding-bottom: 20px;
+}
+
+.input-group-text, button {
+    color: #d14671;
+}
+
+button {
+    border-color: #d14671;
+}
+
+button:hover {
+    background-color: #d14671;
+    color: #243441;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    border-color: #d14671;
+    box-shadow: 0 0 0 .2rem rgba(209, 70, 113, .25);
+}
