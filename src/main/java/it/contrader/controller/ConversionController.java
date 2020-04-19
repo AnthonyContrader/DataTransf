@@ -38,5 +38,10 @@ public class ConversionController extends AbstractController<ConversionDTO> {
 	public Iterable<ConversionDTO> getAllByIdUser(Long id){
 		return service.findAllByIdUser(id);
 	}
+	
+	@GetMapping(value = "/getLastIdByUser")
+	public Long getLastIdByUser(Long id) {
+		return service.getLastId(id);
+	}
 
 }
