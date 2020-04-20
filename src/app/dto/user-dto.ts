@@ -1,4 +1,4 @@
-import { SourceOutputType } from './source-output-type.enum'
+import { UserType } from './user-type.enum'
 
 export class UserDto {
     id: number
@@ -7,5 +7,5 @@ export class UserDto {
 
     password: string
 
-    usertype: SourceOutputType
+    usertype: UserType
 }
