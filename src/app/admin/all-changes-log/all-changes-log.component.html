@@ -22,7 +22,7 @@
       
     </div>
     <div class="row border text-center" *ngFor="let changes of all_changes" >
-      <div class="col-md-1 border-right">
+      <div class="col-md-1 border-right id-changes" (click)="goToChanges(changes.id)">
         {{changes.id}}
       </div>
       <div class="col-md-2 border-right">

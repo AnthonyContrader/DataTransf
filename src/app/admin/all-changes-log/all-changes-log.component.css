@@ -18,3 +18,13 @@
 .row.border, .row.border .border-right {
     border-color: #d14671 !important;
 }
+
+.col-md-1.border-right.id-changes {
+    cursor: pointer;
+}
+
+.col-md-1.border-right.id-changes:hover {
+    cursor: pointer;
+    background-color: #d14671;
+    color: #243441;
+}

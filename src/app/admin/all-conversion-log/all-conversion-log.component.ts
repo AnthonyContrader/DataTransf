@@ -17,4 +17,9 @@ export class AllConversionLogComponent implements OnInit {
     this.service.getAll().subscribe(conversions => this.conversions = conversions)
   }
 
+  goToConversion(id: number){
+    window.location.href = 
+      `admin-dashboard/newconversion?id=${id}`
+  }
+
 }

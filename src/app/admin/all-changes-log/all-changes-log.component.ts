@@ -19,4 +19,9 @@ export class AllChangesLogComponent implements OnInit {
     
   }
 
+  goToChanges(id: number){
+    window.location.href = 
+    `admin-dashboard/newchanges?id=${id}`
+  }
+
 }

@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="row border text-center" *ngFor="let conversion of conversions" >
-      <div class="col-md-1 border-right"> 
+      <div class="col-md-1 border-right id-conversion" (click)="goToConversion(conversion.idConversion)"> 
         {{conversion.idConversion}}
       </div>
       <div class="col-md-1 border-right">
