@@ -19,4 +19,9 @@ export class ConversionLogComponent implements OnInit {
     .subscribe(conversions => this.conversions = conversions)
   }
 
+  goToConversion(id: number){
+    window.location.href = 
+      `${(JSON.parse(localStorage.getItem('user')) as UserDto).usertype.toString().toLowerCase()}-dashboard/newconversion?id=${id}`
+  }
+
 }

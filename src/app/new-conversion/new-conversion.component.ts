@@ -35,8 +35,40 @@ export class NewConversionComponent implements OnInit {
   constructor(private service: ConversionService, private changesService: ChangesService) { }
 
   ngOnInit() {
-    this.new_changes.user = (JSON.parse(localStorage.getItem('user')) as UserDto).id
-    this.new_conversion.idUser = (JSON.parse(localStorage.getItem('user')) as UserDto).id
+    if(new URLSearchParams(window.location.search).get('id')){
+      this.restoreConversion()
+    }else {
+      this.new_changes.user = (JSON.parse(localStorage.getItem('user')) as UserDto).id
+      this.new_conversion.idUser = (JSON.parse(localStorage.getItem('user')) as UserDto).id
+    }
+    
+  }
+
+  restoreConversion(){
+    this.service.read(parseInt(new URLSearchParams(window.location.search).get('id'))).subscribe(conversion=>{
+        this.new_conversion = conversion
+        this.changesService.read(conversion.changes).subscribe(changes=>{
+          this.new_changes = changes
+          if(changes.changes){
+            changes.changes.replace('[', '').replace(']', '').split(',').forEach(tag_and_new_tag=>{
+              this.original_tag.push(tag_and_new_tag.split('=')[0].replace(' ', ''))
+              this.new_tag.push(tag_and_new_tag.split('=')[1].replace(' ', ''))
+              this.original_tag_quantity.push('')
+            })
+          }
+          if(changes.removed){
+            changes.removed.replace('[','').replace(']', '').split(',').forEach(tag=>{
+              this.removed_tag.push(tag)
+              this.removed_tag_index.push(this.original_tag.indexOf(tag))
+              this.original_tag.splice(this.original_tag.indexOf(tag), 1)
+              this.new_tag.splice(this.original_tag.indexOf(tag),1)
+              this.original_tag_quantity.pop()
+              this.removed_tag_quantity.push('')
+            })
+          }
+          this.getOutputString()
+        })
+      })
   }
 
   getSourceOutput() {
