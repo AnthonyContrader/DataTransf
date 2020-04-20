@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDto } from 'src/app/dto/user-dto';
 
 @Component({
   selector: 'app-user-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHomeComponent implements OnInit {
 
+  user : UserDto
+
   constructor() { }
 
   ngOnInit() {
+    this.user = (JSON.parse(localStorage.getItem('user')) )
   }
 
 }

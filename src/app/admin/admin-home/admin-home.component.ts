@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDto } from 'src/app/dto/user-dto';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
+  user : UserDto
+
   constructor() { }
 
   ngOnInit() {
-    console.log('home works')
+    this.user = (JSON.parse(localStorage.getItem('user')) )
   }
 
 }
