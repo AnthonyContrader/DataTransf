@@ -23,4 +23,9 @@ export class ChangesLogComponent implements OnInit {
     }))
   }
 
+  goToChanges(id: number){
+    window.location.href = 
+    `${(JSON.parse(localStorage.getItem('user')) as UserDto).usertype.toString().toLowerCase()}-dashboard/newchanges?id=${id}`
+  }
+
 }

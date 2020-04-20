@@ -10,6 +10,7 @@
 .col-md-1.border-right.id-conversion:hover {
     cursor: pointer;
     background-color: #d14671;
+    color: #243441;
 }
 
 .row.header col-md-* {
