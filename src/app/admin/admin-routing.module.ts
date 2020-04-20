@@ -9,6 +9,7 @@ import { ChangesLogComponent } from '../changes-log/changes-log.component';
 import { AllChangesLogComponent } from './all-changes-log/all-changes-log.component';
 import { NewChangesComponent } from '../new-changes/new-changes.component';
 import { NewConversionComponent } from '../new-conversion/new-conversion.component';
+import {UsersComponent} from './users/users.component';
 
 const routes: Routes = [
   {path: 'admin-dashboard', component: AdminLayoutComponent, children: [
@@ -19,7 +20,8 @@ const routes: Routes = [
     {path: 'changeslog', component: ChangesLogComponent},
     {path: 'allchangeslog', component: AllChangesLogComponent},
     {path: 'newchanges', component: NewChangesComponent},
-    {path: 'newconversion', component: NewConversionComponent}
+    {path: 'newconversion', component: NewConversionComponent},
+    {path : 'users', component: UsersComponent}
   ]}
 ];
 

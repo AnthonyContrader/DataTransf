@@ -14,6 +14,7 @@ import { ChangesLogComponent } from './changes-log/changes-log.component';
 import { UserModule } from './user/user.module';
 import { NewChangesComponent } from './new-changes/new-changes.component';
 import { NewConversionComponent } from './new-conversion/new-conversion.component';
+import { UsersComponent } from './admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NewConversionComponent } from './new-conversion/new-conversion.componen
     ConversionLogComponent,
     ChangesLogComponent,
     NewChangesComponent,
-    NewConversionComponent
+    NewConversionComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
