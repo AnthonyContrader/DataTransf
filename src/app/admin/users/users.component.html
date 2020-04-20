@@ -21,11 +21,15 @@
 
     </div>
     <div class="row border text-center" *ngFor="let user of users" >
-      <div class="col-md-4 border-right"> 
+      <div class="col-md-4 border-right goto">
+        <a (click)="goToAccount(user.id)">
         {{user.username}}
+        </a>
       </div>
-      <div class="col-md-4 border-right">
+      <div class="col-md-4 border-right goto">
+        <a (click)="goToAccount(user.id)">
         {{user.password}}
+      </a>
       </div>
       <div class="col-md-3 border-right">
         {{(user.usertype)}}

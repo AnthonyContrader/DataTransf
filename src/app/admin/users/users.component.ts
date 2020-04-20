@@ -20,5 +20,8 @@ export class UsersComponent implements OnInit {
   deleteUser(user : UserDto) {
     this.service.delete(user.id).subscribe( users => this.service.getAll().subscribe( users => this.users = users));
   }
+  goToAccount(id: number){
+   window.location.href = `admin-dashboard/account?id=${id}`
+  }
 
 }

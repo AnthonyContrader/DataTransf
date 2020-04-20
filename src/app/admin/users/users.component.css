@@ -34,3 +34,13 @@
 .delete:hover {
     background-color: #d14671;
 }
+.border-right.goto:hover svg {
+    fill: #243441;
+}
+.border-right.goto:hover {
+    background-color: #d14671;
+}
+.border-right.goto {
+    width: 100%;
+    cursor: pointer;
+}
