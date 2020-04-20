@@ -20,7 +20,31 @@ export class NewChangesComponent implements OnInit {
   constructor(private service: ChangesService) { }
 
   ngOnInit() {
-    this.new_changes.user = (JSON.parse(localStorage.getItem('user')) as UserDto).id
+    if(new URLSearchParams(window.location.search).get('id')) {
+      this.restoreChanges()
+    } else {
+      this.new_changes.user = (JSON.parse(localStorage.getItem('user')) as UserDto).id
+    }
+    
+  }
+
+  restoreChanges(){
+    this.service.read(parseInt(new URLSearchParams(window.location.search).get('id'))).subscribe(changes=>{
+      this.new_changes = changes
+          if(changes.changes){
+            changes.changes.replace('[', '').replace(']', '').split(',').forEach(tag_and_new_tag=>{
+              this.original_tag.push(tag_and_new_tag.split('=')[0].replace(' ', ''))
+              this.new_tag.push(tag_and_new_tag.split('=')[1].replace(' ', ''))
+              this.tagQuantity.push('')
+            })
+          }
+          if(changes.removed){
+            changes.removed.replace('[','').replace(']', '').split(',').forEach(tag=>{
+              this.removed_tag.push(tag)
+              this.removedTagQuantity.push('')
+            })
+          }
+    })
   }
 
   addTag(){

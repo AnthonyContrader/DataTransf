@@ -19,8 +19,8 @@
       
     </div>
     <div class="row border text-center" *ngFor="let changes of user_changes" >
-      <div class="col-md-2 border-right">
-        {{changes.name}}
+      <div class="col-md-2 border-right changes-name" (click)="goToChanges(changes.id)">
+          {{changes.name}}
       </div>
       <div class="col-md-6 border-right">
         {{(changes.changes.length > 60) ? (changes.changes | slice:0:60) + '...' : (changes.changes)}}
