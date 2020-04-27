@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "source",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sourcetype",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "outputtype",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "usr",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tagname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "removedtag",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tagposition",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20200422142758",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "convs",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+    "microserviceName": "conv"
+}

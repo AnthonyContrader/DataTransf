@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "user",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tag_name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "removed_tag",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tag_position",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "changes_name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20200422073550",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "changes",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+    "microserviceName": "changes"
+}
