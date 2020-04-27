@@ -15,6 +15,10 @@ export class NewConversionComponent implements OnInit {
 
   conversionDTO = new ConversionDTO()
 
+  changesPreset: ChangesDTO[]
+
+  presetIndex: number
+
   new_changes = new ChangesDTO()
 
   original_tag = new Array<string>()
@@ -37,13 +41,15 @@ export class NewConversionComponent implements OnInit {
 
   ngOnInit() {
 
-    this.router.queryParams.subscribe(param=>{
-      if(param.id){
-        this.service.read(param.id).subscribe(conversion=> this.conversionDTO = conversion)
-      }else{
+    this.router.queryParams.subscribe(param => {
+      if (param.id) {
+        this.service.read(param.id).subscribe(conversion => this.conversionDTO = conversion)
+      } else {
         this.conversionDTO.usr = (JSON.parse(localStorage.getItem('user')) as UserDTO).id
       }
     })
+
+    this.changesService.readAllByUser((JSON.parse(localStorage.getItem('user')) as UserDTO).id).subscribe(changes => this.changesPreset = changes)
 
   }
 
@@ -238,20 +244,20 @@ export class NewConversionComponent implements OnInit {
 
   save() {
 
-    if(this.original_tag.length > 0){
+    if (this.original_tag.length > 0) {
       this.conversionDTO.tagname = '['
-      this.original_tag.forEach((tag, i)=>{
-        this.conversionDTO.tagname += `${tag}=${this.new_tag[i]}${i<this.original_tag.length-1 ? ',' : ']'}`
+      this.original_tag.forEach((tag, i) => {
+        this.conversionDTO.tagname += `${tag}=${this.new_tag[i]}${i < this.original_tag.length - 1 ? ',' : ']'}`
       })
     }
 
-    if(this.removed_tag.length > 0){
+    if (this.removed_tag.length > 0) {
       this.conversionDTO.removedtag = `[${this.removed_tag.toString()}]`
     }
 
-    if(this.conversionDTO.id){
+    if (this.conversionDTO.id) {
       this.service.update(this.conversionDTO).subscribe(conversion => this.conversionDTO = conversion)
-    }else {
+    } else {
       this.service.insert(this.conversionDTO).subscribe(conversion => this.conversionDTO = conversion)
     }
   }
@@ -294,6 +300,10 @@ export class NewConversionComponent implements OnInit {
     }
 
     return json
+  }
+
+  getPreset(){
+    
   }
 
 }

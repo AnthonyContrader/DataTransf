@@ -30,7 +30,7 @@
             <mat-label>Source Type</mat-label>
             <mat-select
               [(value)]="conversionDTO.sourcetype"
-              (change)="getOutput()"
+              (selectionChange)="getOutput()"
             >
               <mat-option>None</mat-option>
               <mat-option value="XML">XML</mat-option>
@@ -44,11 +44,26 @@
             <mat-label>Source Type</mat-label>
             <mat-select
               [(value)]="conversionDTO.outputtype"
-              (change)="getOutput()"
+              (selectionChange)="getOutput()"
             >
               <mat-option>None</mat-option>
               <mat-option value="XML">XML</mat-option>
               <mat-option value="JSON">JSON</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="changesPreset">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>Source Type</mat-label>
+            <mat-select
+              [(value)]="presetIndex"
+              (selectionChange)="getPreset()"
+            >
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let changes of changesPreset; let i = index" value="{{i}}">{{changes.changes_name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
