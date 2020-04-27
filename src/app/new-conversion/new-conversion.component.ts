@@ -17,7 +17,7 @@ export class NewConversionComponent implements OnInit {
 
   changesPreset: ChangesDTO[]
 
-  presetIndex: number
+  presetIndex: string
 
   new_changes = new ChangesDTO()
 
@@ -105,7 +105,6 @@ export class NewConversionComponent implements OnInit {
     let domElement = new DOMParser().parseFromString(`<root>${outputSource}</root>`, 'text/xml')
 
     this.removed_tag.forEach(el => {
-
       domElement.querySelectorAll(el).forEach(remove => {
         remove.remove()
       })
@@ -212,21 +211,25 @@ export class NewConversionComponent implements OnInit {
           }
 
 
-          this.original_tag = tagList
-          this.new_tag = newTagList
-          this.original_tag_quantity = tagQuantity
+
           break;
         case 'JSON':
           let json = JSON.parse(this.conversionDTO.source)
 
           this.getJsonKey(json, tagList, newTagList, tagQuantity)
 
-          this.original_tag = tagList
-          this.new_tag = newTagList
-          this.original_tag_quantity = tagQuantity
+
           break;
       }
+      this.original_tag = tagList
+      this.new_tag = newTagList
+      this.original_tag_quantity = tagQuantity
+      this.removed_tag = new Array<string>()
+      this.removed_tag_index = new Array<number>()
+      this.removed_tag_quantity = new Array()
     }
+
+
   }
 
   getJsonKey(obj: object, keyList: Array<string>, tagList: Array<string>, tagQuantity: Array<any>) {
@@ -302,8 +305,31 @@ export class NewConversionComponent implements OnInit {
     return json
   }
 
-  getPreset(){
-    
+  getPreset() {
+    if (this.presetIndex) {
+      this.getOriginalTag()
+
+      this.changesPreset[parseInt(this.presetIndex)].tag_name.replace('[', '').replace(']', '').split(',').forEach(el => {
+        if (this.original_tag.includes(el.split('=')[0])) {
+          this.new_tag[this.original_tag.indexOf(el.split('=')[0])] = el.split('=')[1]
+        } else {
+          this.original_tag.push(el.split('=')[0])
+          this.new_tag.push(el.split('=')[1])
+          this.original_tag_quantity.push('')
+        }
+      })
+
+      this.changesPreset[parseInt(this.presetIndex)].removed_tag.replace('[', '').replace(']', '').split(',').forEach(el => {
+        if (!this.removed_tag.includes(el)) {
+          this.removed_tag.push(el)
+          this.removed_tag_quantity.push('')
+        }
+      })
+
+      this.getOutputString()
+    } else {
+      this.getOriginalTag()
+    }
   }
 
 }
