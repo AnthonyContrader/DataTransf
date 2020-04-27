@@ -309,22 +309,25 @@ export class NewConversionComponent implements OnInit {
     if (this.presetIndex) {
       this.getOriginalTag()
 
-      this.changesPreset[parseInt(this.presetIndex)].tag_name.replace('[', '').replace(']', '').split(',').forEach(el => {
-        if (this.original_tag.includes(el.split('=')[0])) {
-          this.new_tag[this.original_tag.indexOf(el.split('=')[0])] = el.split('=')[1]
-        } else {
-          this.original_tag.push(el.split('=')[0])
-          this.new_tag.push(el.split('=')[1])
-          this.original_tag_quantity.push('')
-        }
-      })
-
-      this.changesPreset[parseInt(this.presetIndex)].removed_tag.replace('[', '').replace(']', '').split(',').forEach(el => {
-        if (!this.removed_tag.includes(el)) {
-          this.removed_tag.push(el)
-          this.removed_tag_quantity.push('')
-        }
-      })
+      if (this.changesPreset[parseInt(this.presetIndex)].tag_name) {
+        this.changesPreset[parseInt(this.presetIndex)].tag_name.replace('[', '').replace(']', '').split(',').forEach(el => {
+          if (this.original_tag.includes(el.split('=')[0])) {
+            this.new_tag[this.original_tag.indexOf(el.split('=')[0])] = el.split('=')[1]
+          } else {
+            this.original_tag.push(el.split('=')[0])
+            this.new_tag.push(el.split('=')[1])
+            this.original_tag_quantity.push('')
+          }
+        })
+      }
+      if (this.changesPreset[parseInt(this.presetIndex)].removed_tag) {
+        this.changesPreset[parseInt(this.presetIndex)].removed_tag.replace('[', '').replace(']', '').split(',').forEach(el => {
+          if (!this.removed_tag.includes(el)) {
+            this.removed_tag.push(el)
+            this.removed_tag_quantity.push('')
+          }
+        })
+      }
 
       this.getOutputString()
     } else {
