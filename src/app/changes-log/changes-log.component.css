@@ -1,0 +1,31 @@
+* {
+  color: #c2c7ca;
+  background-color: transparent;
+}
+
+.row.header col-md-* {
+  padding-bottom: 20px;
+}
+
+.row {
+  min-height: 2rem;
+}
+
+.container-fluid {
+  padding-bottom: 20px;
+}
+
+.row.border,
+.row.border .border-right {
+  border-color: #d14671 !important;
+}
+
+.col-md-2.border-right.changes-name {
+  cursor: pointer;
+}
+
+.col-md-2.border-right.changes-name:hover {
+  cursor: pointer;
+  background-color: #d14671;
+  color: #243441;
+}

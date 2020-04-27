@@ -1,0 +1,47 @@
+* {
+  color: #c2c7ca;
+  background-color: transparent;
+}
+
+.row.header col-md-* {
+  padding-bottom: 20px;
+}
+
+.row {
+  min-height: 2rem;
+}
+
+.container-fluid {
+  padding-bottom: 20px;
+}
+
+.row.border,
+.row.border .border-right {
+  border-color: #d14671 !important;
+}
+
+.botton {
+  border: 0ch;
+}
+.delete {
+  width: 100%;
+  color: #243441;
+  cursor: pointer;
+}
+
+.delete:hover svg {
+  fill: #243441;
+}
+.delete:hover {
+  background-color: #d14671;
+}
+.border-right.goto:hover svg {
+  fill: #243441;
+}
+.border-right.goto:hover {
+  background-color: #d14671;
+}
+.border-right.goto {
+  width: 100%;
+  cursor: pointer;
+}

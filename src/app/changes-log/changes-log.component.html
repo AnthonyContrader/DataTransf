@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 offset-md-5 text-center">
+        My Changes
+      </div>
+    </div>
+    <div class="row border header text-center">
+      <div class="col-md-2 border-right">
+        Name
+      </div>
+      <div class="col-md-6 border-right">
+        Tag
+      </div>
+      <div class="col-md-4 border-right">
+        Removed Tag
+      </div>
+    </div>
+    <div class="row border text-center" *ngFor="let changes of changesDTO">
+      <div
+        class="col-md-2 border-right changes-name"
+        (click)="goToChanges(changes.id)"
+      >
+        {{ changes.changes_name }}
+      </div>
+      <div class="col-md-6 border-right">
+        {{
+          changes.tag_name.length > 60
+            ? (changes.tag_name | slice: 0:60) + "..."
+            : changes.tag_name
+        }}
+      </div>
+      <div class="col-md-4">
+        {{
+          changes.removed_tag.length > 40
+            ? (changes.removed_tag | slice: 0:40) + "..."
+            : changes.removed_tag
+        }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+* {
+    color: #c2c7ca;
+    background-color: transparent;
+  }
+  
+  .col-md-1.border-right.id-conversion {
+    cursor: pointer;
+  }
+  
+  .col-md-1.border-right.id-conversion:hover {
+    cursor: pointer;
+    background-color: #d14671;
+    color: #243441;
+  }
+  
+  .row.header col-md-* {
+    padding-bottom: 20px;
+  }
+  
+  .row {
+    min-height: 2rem;
+  }
+  
+  .container-fluid {
+    padding-bottom: 20px;
+  }
+  
+  .row.border,
+  .row.border .border-right {
+    border-color: #d14671 !important;
+  }
+  

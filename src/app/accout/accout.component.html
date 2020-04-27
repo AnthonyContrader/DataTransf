@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row header">
+    <div class="col-md-2 offset-md-5 text-center">
+      <p>My account</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Username</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="userDTO.login" />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Password</span>
+        </div>
+        <input type="password" class="form-control" />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Email</span>
+        </div>
+        <input type="email" class="form-control" [(ngModel)]="userDTO.email" />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">First Name</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="userDTO.firstName"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Last Name</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="userDTO.lastName"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">Image Url</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="userDTO.imageUrl"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">User Type</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ userDTO.authorities }}"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="saveChanges()"
+      >
+        SAVE
+      </button>
+    </div>
+  </div>
+</div>

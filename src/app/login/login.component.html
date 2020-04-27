@@ -1,0 +1,244 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 bg-left">
+      <div class="d-flex align-items-center logo-svg-container">
+        <div class="col-md-4 offset-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 386.87 334.13">
+            <defs>
+              <style>
+                .cls-1,
+                .cls-2 {
+                  fill: #d14671;
+                }
+                .cls-2 {
+                  font-size: 72px;
+                  font-family: CenturyGothic-Bold, Century Gothic;
+                  font-weight: 700;
+                }
+                .cls-3 {
+                  fill: #fff;
+                }
+                .cls-4 {
+                  fill: #243441;
+                }
+              </style>
+            </defs>
+            <g id="Intestazione">
+              <rect class="cls-1" width="386.87" height="222.41" rx="10" />
+              <text class="cls-2" transform="translate(4.44 330.89)">
+                Data Transf
+              </text>
+              <polygon
+                class="cls-3"
+                points="281.44 154.08 293.17 143.83 293.17 23.65 281.44 13.39 281.44 154.08"
+              />
+              <rect
+                class="cls-3"
+                x="158.72"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-3"
+                x="249.31"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-3"
+                x="113.42"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-3"
+                x="136.07"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-3"
+                x="181.37"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-3"
+                x="204.02"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-3"
+                x="226.67"
+                y="68.33"
+                width="11.73"
+                height="62.05"
+              />
+              <polygon
+                class="cls-3"
+                points="351.84 73.72 351.84 93.75 363.58 83.74 351.84 73.72"
+              />
+              <polygon
+                class="cls-3"
+                points="304.91 133.81 316.64 123.8 316.64 43.68 304.91 33.66 304.91 133.81"
+              />
+              <polygon
+                class="cls-3"
+                points="328.38 113.78 340.11 103.77 340.11 63.71 328.38 53.69 328.38 113.78"
+              />
+              <polygon
+                class="cls-4"
+                points="105.43 68.33 93.7 78.58 93.7 198.77 105.43 209.02 105.43 68.33"
+              />
+              <rect
+                class="cls-4"
+                x="147.39"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-4"
+                x="124.74"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-4"
+                x="260.64"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-4"
+                x="237.99"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-4"
+                x="215.34"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-4"
+                x="192.69"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <rect
+                class="cls-4"
+                x="170.04"
+                y="92.04"
+                width="11.73"
+                height="62.05"
+              />
+              <polygon
+                class="cls-4"
+                points="35.03 148.69 35.03 128.66 23.3 138.68 35.03 148.69"
+              />
+              <polygon
+                class="cls-4"
+                points="81.96 88.6 70.23 98.61 70.23 178.74 81.96 188.75 81.96 88.6"
+              />
+              <polygon
+                class="cls-4"
+                points="58.5 108.63 46.76 118.64 46.76 158.71 58.5 168.72 58.5 108.63"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 bg-right">
+      <form #loginForm="ngForm" *ngIf="!signup">
+        <div class="login-icon">
+          <i class="far fa-user-circle fa-5x"></i>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            ngModel
+            placeholder="Username"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            ngModel
+            placeholder="Username"
+          />
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" name="rememberMe" ngModel id="rememberMe" />
+          <label for="rememberMe">Remember Me</label>
+        </div>
+        <button type="submit" (click)="login(loginForm)">Login</button>
+        <button (click)="changeForm()">Go to Signup</button>
+      </form>
+
+      <form #signupForm="ngForm" *ngIf="signup">
+        <div class="alert alert-success" role="alert" *ngIf="signupNotify">
+          signup confirmed!!!
+        </div>
+
+        <div class="login-icon">
+          <i class="far fa-user-circle fa-5x"></i>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="login"
+            ngModel
+            placeholder="Username"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            ngModel
+            placeholder="Password"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            ngModel
+            placeholder="Email"
+          />
+        </div>
+
+        <button type="submit" (click)="signUp(signupForm)">SignUp</button>
+        <button (click)="changeForm()">Go to Login</button>
+      </form>
+    </div>
+  </div>
+</div>
