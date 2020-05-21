@@ -41,7 +41,7 @@
 
         <div class="col-md-6">
           <mat-form-field>
-            <mat-label>Source Type</mat-label>
+            <mat-label>Output Type</mat-label>
             <mat-select
               [(value)]="conversionDTO.outputtype"
               (selectionChange)="getOutput()"
@@ -57,7 +57,7 @@
       <div class="row" *ngIf="changesPreset">
         <div class="col-md-6">
           <mat-form-field>
-            <mat-label>Source Type</mat-label>
+            <mat-label>Preset</mat-label>
             <mat-select
               [(value)]="presetIndex"
               (selectionChange)="getPreset()"
